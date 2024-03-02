@@ -4,13 +4,13 @@ import HeroList from '../hero/HeroList';
 const MarvelScreen = () => {
 
     return (
-        <div>
-            <h1>Marvel Screen</h1>
-            
+        <div className=''>
+            <h1>Desarrollo</h1>
+
             <hr />
 
-            
-            <HeroList publisher='Marvel Comics' />
+
+            <HeroList publisher='Body' />
 
 
         </div>

@@ -10,7 +10,7 @@ const DashboardRouter = () => {
     return (
         <>
             <Navbar />
-            <div className="container mt-5">
+            <div className="container m-3 mx-5 ">
                 <Routes>
                     <Route path="/" element={<MarvelScreen />} />
                     <Route path="/dc" element={<DcScreen />} />
@@ -19,7 +19,7 @@ const DashboardRouter = () => {
 
                     <Route path="/hero/:heroId" element={<HeroScreen />} />
                 </Routes>
-            </div>            
+            </div>
         </>
     )
 }

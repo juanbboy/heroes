@@ -6,11 +6,11 @@ const DcScreen = () => {
     return (
         <div>
             <h1 className="animate__animated animate__fadeInLeft">DC Screen</h1>
-            
+
             <hr />
-            
-            <HeroList publisher='DC Comics' />
-        
+
+            <HeroList publisher='Seamless' />
+
 
 
         </div>
