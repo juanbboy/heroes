@@ -1,13 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const HeroCard = ({ id, name, maquina, descripcion, fecha_creacion, fecha_entrega }) => {
+const HeroCard = ({ id, name, maquina, fecha_creacion, fecha_entrega }) => {
     return (
         <div>
             <div key={id} className="col animate__animated animate__fadeIn">
-                <div className="card h-100">
-                    <div className="col-7 align-self-center">
-                        <img src={`/assets/${id}.jpeg`} style={{ maxHeight: '200px', objectFit: 'scale-down' }} className="card-img-top m-1" alt={id} />
+                <div className="card w-75">
+                    <div className="col-7 align-self-center d-flex justify-content-center">
+                        <img src={`/assets/${id}.jpg`} style={{ maxHeight: '150px', objectFit: 'scale-down' }} className="card-img-top m-1" alt={id} />
+                        <img src={`/assets/${id}1.jpg`} style={{ maxHeight: '150px', objectFit: 'scale-down' }} className="card-img-top m-1" alt={`${id}1`} />
                     </div>
                     <div className="card-body">
                         <h3 className="card-title">{id}</h3>

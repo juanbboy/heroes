@@ -25,8 +25,9 @@ const HeroScreen = () => {
 
             <div key={id} className="col-4 mx-auto">
                 <div className="card h-100">
-                    <div className="col-7 align-self-center">
-                        <img src={`/assets/${id}.jpeg`} className="card-img-top m-1" alt={id} />
+                    <div className="col-7 align-self-center d-flex justify-content-center">
+                        <img src={`/assets/${id}.jpg`} style={{ maxHeight: '180px', objectFit: 'scale-down' }} className="card-img-top m-1" alt={id} />
+                        <img src={`/assets/${id}1.jpg`} style={{ maxHeight: '180px', objectFit: 'scale-down' }} className="card-img-top m-1" alt={`${id}1`} />
                     </div>
                     <div className="card-body">
                         {/* <h3 className="card-title">{id}</h3> */}
