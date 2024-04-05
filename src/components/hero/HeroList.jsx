@@ -8,19 +8,41 @@ import { Data1 } from '../../selectors/get';
 
 const HeroList = ({ publisher }) => {
 
-    // const [heroes, setData] = useState()
+    const [heroes, setData] = useState()
+    // console.log(data())
 
-    // useEffect(() => {
-    //     getHeroesByPublisher(publisher).then((res) => {
-    //         setData(res)
-    //         console.log(res)
-    //     })
 
-    // }, [])
+    useEffect(() => {
+        data()
+    }, [])
 
-    // const heroes = useMemo(() => getHeroesByPublisher(publisher), [publisher]);
-    const heroes = GetHeroesByPublisher(publisher)
-    console.log(GetHeroesByPublisher(publisher))
+
+
+
+
+    // console.log(GetHeroesByPublisher(publisher).then((res) => {
+    //     console.log(res, "res");
+    //     return (res);
+    // }))
+    const data = async () => {
+
+        await GetHeroesByPublisher(publisher).then((res) => {
+            console.log(res, "res");
+            setData(res)
+            return (res);
+
+        })
+
+    }
+    // const heroes = useMemo(() => GetHeroesByPublisher(publisher), [publisher]);
+    // const [heroes, setheores] = useState()
+    // const heroes = data.then(res => { return res })
+    // console.log(GetHeroesByPublisher(publisher).then((res) => {
+    //     setData(res)
+    //     console.log(res, "res")
+    // }))
+    // console.log(GetHeroesByPublisher(publisher), "heroes")
+    console.log(heroes, "heroes")
     // console.log(heroes)
 
     if (!heroes) return null
