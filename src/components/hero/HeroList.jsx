@@ -9,41 +9,22 @@ import { Data1 } from '../../selectors/get';
 const HeroList = ({ publisher }) => {
 
     const [heroes, setData] = useState()
-    // console.log(data())
-
 
     useEffect(() => {
         data()
     }, [])
 
-
-
-
-
-    // console.log(GetHeroesByPublisher(publisher).then((res) => {
-    //     console.log(res, "res");
-    //     return (res);
-    // }))
     const data = async () => {
-
         await GetHeroesByPublisher(publisher).then((res) => {
-            console.log(res, "res");
             setData(res)
-            return (res);
-
+            console.log(res)
         })
-
     }
-    // const heroes = useMemo(() => GetHeroesByPublisher(publisher), [publisher]);
-    // const [heroes, setheores] = useState()
-    // const heroes = data.then(res => { return res })
-    // console.log(GetHeroesByPublisher(publisher).then((res) => {
-    //     setData(res)
-    //     console.log(res, "res")
-    // }))
-    // console.log(GetHeroesByPublisher(publisher), "heroes")
+
+    // const heroes = useMemo(() => datas, [publisher]);
+
     console.log(heroes, "heroes")
-    // console.log(heroes)
+
 
     if (!heroes) return null
 

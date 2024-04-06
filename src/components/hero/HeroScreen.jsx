@@ -1,18 +1,45 @@
-import React, { useMemo } from 'react'
 import { useParams, Navigate, useNavigate } from 'react-router-dom'
 import { getHeroById } from '../../selectors/getHeroById';
+import React, { useEffect, useMemo, useState } from 'react'
 
 const HeroScreen = () => {
 
     const { heroId } = useParams();
     const navigate = useNavigate()
+    const [hero, sethero] = useState({
+        id: "",
+        name: "",
+        maquina: "",
+        fecha_creacion: "",
+        fecha_entrega: "",
+        descripcion: ""
+    })
+    let { id, name, maquina, fecha_creacion, fecha_entrega, descripcion } = hero;
 
-    const hero = useMemo(() => getHeroById(heroId), [heroId]);
+    useEffect(() => {
+        data()
+    }, [])
+
+
+    const data = async () => {
+        await getHeroById(heroId).then((res) => {
+            sethero(res)
+            console.log(res)
+        })
+    }
+
+    // const hero = await getHeroById(heroId).then((res) => {
+    //     return res
+    // })
+
+    console.log(hero)
+    console.log(data())
 
     if (!hero) {
-        return <Navigate to='/marvel' />
+        return null
+        //     return <Navigate to='/marvel' />
     }
-    const { id, name, maquina, fecha_creacion, fecha_entrega, descripcion } = hero;
+
 
     const handleReturn = () => {
         navigate(-1);
@@ -26,7 +53,7 @@ const HeroScreen = () => {
             <div key={id} className="col-4 mx-auto">
                 <div className="card h-100">
                     <div className="col-7 align-self-center d-flex justify-content-center">
-                        <img src={`/assets/${id}.jpg`} style={{ maxHeight: '180px', objectFit: 'scale-down' }} className="card-img-top m-1" alt={id} />
+                        <img src={`/assets/${id}.jpg`} style={{ maxHeight: '180px', objectFit: 'scale-down' }} className="card-img-top m-1" alt={`${id}1`} />
                         <img src={`/assets/${id}1.jpg`} style={{ maxHeight: '180px', objectFit: 'scale-down' }} className="card-img-top m-1" alt={`${id}1`} />
                     </div>
                     <div className="card-body">

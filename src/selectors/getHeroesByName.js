@@ -1,13 +1,13 @@
-// import { heroes } from "../data/heroes";
+import { Data } from "../data/heroes";
 
-// export const getHeroesByName = (name = '') => {
+export const getHeroesByName = async (name = '') => {
+    const data = Data()
 
-//     console.log('getHeroesByName');
+    if (name.length === 0) {
+        return [];
+    }
 
-//     if (name.length === 0) {
-//         return [];
-//     }
-
-//     name = name.toLowerCase()
-//     return heroes.filter(hero => hero.superhero.toLowerCase().includes(name))
-// }
+    name = name.toLowerCase()
+    console.log(data)
+    return await data.then((res) => res.filter(hero => hero.superhero.toLowerCase().includes(name)))
+}
