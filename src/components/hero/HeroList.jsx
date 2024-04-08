@@ -8,16 +8,17 @@ import { Data1 } from '../../selectors/get';
 
 const HeroList = ({ publisher }) => {
 
-    const [heroes, setData] = useState()
+    const [heroes, setData] = useState(0)
 
     useEffect(() => {
         data()
     }, [])
 
+
+
     const data = async () => {
         await GetHeroesByPublisher(publisher).then((res) => {
             setData(res)
-            console.log(res)
         })
     }
 

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import queryString from 'query-string'
@@ -9,22 +9,43 @@ const SearchScreen = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
+    const [searchHeroes, setsearchHeroes] = useState()
 
+    useEffect(() => {
+        search()
+    }, [])
 
-    const { q = '' } = queryString.parse(location.search);
-    
-    const [ formValues, handleInputChange ] = useForm({
-        searchText : q
+    // const { q = '' } = queryString.parse(location.search);
+
+    const [formValues, handleInputChange] = useForm({
+        searchText: ""
     });
 
     const { searchText } = formValues;
 
-    const searchHeroes = useMemo(() => getHeroesByName(q), [q]);
+    const search = async (e) => {
+        await getHeroesByName(e).then((res) => {
+            setsearchHeroes(res)
+            console.log(res)
+        })
+    }
+    // const searchHeroes = useMemo(() => getHeroesByName(q), [q]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate(`?q=${searchText}`)
+        // navigate(`?q=${searchText}`)
     }
+
+    const handleChange = (e) => {
+        handleInputChange(e)
+        // navigate(`?q=${searchText}`)
+        search(e.target.value)
+    }
+
+
+    if (!searchHeroes) return null
+
+
     return (
         <div>
             <h1>Search Screen</h1>
@@ -35,20 +56,20 @@ const SearchScreen = () => {
                         Búsqueda de Héroes
                     </h3>
 
-                    <form onSubmit={ handleSubmit } >
+                    <form onSubmit={handleSubmit} >
 
-                        <input 
+                        <input
                             type="text"
                             placeholder="Ingrese el nombre del héroe"
                             className="form-control mt-4"
                             name="searchText"
                             autoComplete="off"
-                            value={ searchText }
-                            onChange={ handleInputChange }
+                            value={searchText}
+                            onChange={handleChange}
                         />
 
                         <button
-                            className="btn btn-primary mt-3" 
+                            className="btn btn-primary mt-3"
                             type="submit">
                             Buscar
                         </button>
@@ -60,9 +81,9 @@ const SearchScreen = () => {
                         Resultados
                     </h3>
                     <hr />
-                        {
-                            searchHeroes.map(hero => <HeroCard key={hero.id} {...hero} />)
-                        }
+                    {
+                        searchHeroes.map(hero => <div className='p-1'><HeroCard key={hero.id} {...hero} /> </div>)
+                    }
                 </div>
             </div>
         </div>

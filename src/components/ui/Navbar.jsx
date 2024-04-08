@@ -19,14 +19,6 @@ const Navbar = () => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-5">
-            <Link
-                className="navbar-brand"
-                to="/"
-            >
-                Navbar
-            </Link>
-
-
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
 

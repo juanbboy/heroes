@@ -5,7 +5,7 @@ import HeroList from '../hero/HeroList';
 const MarvelScreen = () => {
 
     return (
-        <div className=''>
+        <div >
             <h1>Desarrollo</h1>
 
             <hr />

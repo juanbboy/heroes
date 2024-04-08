@@ -9,5 +9,5 @@ export const getHeroesByName = async (name = '') => {
 
     name = name.toLowerCase()
     console.log(data)
-    return await data.then((res) => res.filter(hero => hero.superhero.toLowerCase().includes(name)))
+    return await data.then((res) => res.filter(hero => hero.id.toLowerCase().includes(name)))
 }
