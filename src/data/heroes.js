@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const Data = async () => {
     let data
-    await axios.get('http://localhost:4002/api/').then((res) => {
+    await axios.get('https://nylondesarrollo.vercel.app/api/').then((res) => {
 
         data = (res.data)
 
