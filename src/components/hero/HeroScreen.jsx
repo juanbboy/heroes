@@ -13,7 +13,6 @@ const HeroScreen = () => {
         data()
     }, [])
 
-
     const data = async () => {
         await getHeroById(heroId).then((res) => {
             sethero(res)
@@ -21,17 +20,7 @@ const HeroScreen = () => {
         })
     }
 
-    // const hero = await getHeroById(heroId).then((res) => {
-    //     return res
-    // })
-
-    console.log(hero)
-
-    if (!hero) {
-        return null
-        //     return <Navigate to='/marvel' />
-    }
-
+    if (!hero) return null
 
     const handleReturn = () => {
         navigate(-1);
@@ -52,11 +41,12 @@ const HeroScreen = () => {
                         {/* <h3 className="card-title">{id}</h3> */}
 
                         <ul className="list-group list-group-flush">
-                            <li className="list-group-item"><b> Tipo: </b> {hero.name} </li>
+                            <li className="list-group-item"> <b> Descripción: </b> {hero.name} </li>
+                            <li className="list-group-item"><b> Tipo: </b> {hero.publisher} </li>
                             <li className="list-group-item"> <b>Maquina: </b> {hero.maquina} </li>
                             <li className="list-group-item"> <b> fecha de creacion: </b> {hero.fecha_creacion} </li>
                             <li className="list-group-item"> <b> fecha de entrega: </b> {hero.fecha_entrega} </li>
-                            <li className="list-group-item"> <b> Descripción: </b> {hero.descripcion} </li>
+                            <li className="list-group-item text-wrap"> <b> Observacion: </b> {hero.descripcion} </li>
                         </ul>
 
                     </div>

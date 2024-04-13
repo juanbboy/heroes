@@ -6,7 +6,7 @@ const DcScreen = () => {
 
     return (
         <div>
-            <h1 className="animate__animated animate__fadeInLeft">DC Screen</h1>
+            <h1 className="animate__animated animate__fadeInRight">Seamless</h1>
 
             <hr />
 

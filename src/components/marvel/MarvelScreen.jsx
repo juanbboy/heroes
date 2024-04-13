@@ -6,7 +6,7 @@ const MarvelScreen = () => {
 
     return (
         <div >
-            <h1>Desarrollo</h1>
+            <h1 className='animate__animated animate__fadeInRight'>Body</h1>
 
             <hr />
 

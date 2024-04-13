@@ -1,7 +1,31 @@
+import axios from 'axios';
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
-const HeroCard = ({ id, name, maquina, fecha_creacion, fecha_entrega }) => {
+const HeroCard = ({ _id, id, name, maquina, fecha_creacion, fecha_entrega }) => {
+
+    const elimina = async (id) => {
+        Swal.fire({
+            title: 'Estás seguro?',
+            text: "¡No podrás revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Borrar!'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                await axios.delete(`http://localhost:4002/api/deldesarrollo/${id}`)
+                    .then(res => {
+
+                    })
+                window.location.reload()
+            }
+        })
+    }
+
     return (
         <div>
             <div key={id} className=" animate__animated animate__fadeIn">
@@ -32,14 +56,14 @@ const HeroCard = ({ id, name, maquina, fecha_creacion, fecha_entrega }) => {
                             </Link>
                         </div>
                         <div>
-                            <Link to={`/hero/${id}`}>
+                            <Link to={`/ingreso/edit/${_id}`}>
                                 Editar
                             </Link>
                         </div>
                         <div>
-                            <Link to={`/hero/${id}`}>
+                            <a type='button' className='link-primary' onClick={elimina.bind(this, _id)}>
                                 Eliminar
-                            </Link>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -47,5 +71,4 @@ const HeroCard = ({ id, name, maquina, fecha_creacion, fecha_entrega }) => {
         </div >
     )
 }
-
 export default HeroCard
