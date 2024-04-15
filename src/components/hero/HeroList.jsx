@@ -18,10 +18,12 @@ const HeroList = ({ publisher }) => {
 
     const data = async () => {
         await GetHeroesByPublisher(publisher).then((res) => {
+            // console.log(res.short((a, b) => a.fecha_entrega - b.fecha_entrega))
+            console.log(res)
             setData(res)
         })
     }
-
+    // console.log(heroes.short((a, b) => a.arrivalDate - b.arrivalDate))
     // const heroes = useMemo(() => datas, [publisher]);
 
     console.log(heroes, "heroes")
@@ -29,8 +31,9 @@ const HeroList = ({ publisher }) => {
 
     if (!heroes) return null
 
+
     return (
-        <div className="row row-cols-1 row-cols-md-4 row-cols-lg-3 g-4 animate__animated animate__fadeIn">
+        <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 animate__animated animate__fadeIn">
             {
                 heroes.map(hero => {
                     return (

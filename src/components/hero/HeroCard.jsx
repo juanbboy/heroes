@@ -17,7 +17,7 @@ const HeroCard = ({ _id, id, name, maquina, fecha_creacion, fecha_entrega }) => 
             confirmButtonText: 'Si, Borrar!'
         }).then(async (result) => {
             if (result.isConfirmed) {
-                await axios.delete(`http://localhost:4002/api/deldesarrollo/${id}`)
+                await axios.delete(`https://desarrollonylon.vercel.app/api/deldesarrollo/${id}`)
                     .then(res => {
 
                     })

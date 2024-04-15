@@ -5,16 +5,20 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 const Formulario = () => {
     const navigate = useNavigate()
     const params = useParams()
     const [datos, setdatos] = useState(0)
+    const [value, onChange] = useState(new Date());
+
 
     useEffect(() => {
         console.log(params.id)
         if (params.id != null) {
-            axios.get('http://localhost:4002/api').then((res) => {
+            axios.get('https://desarrollonylon.vercel.app/api').then((res) => {
                 console.log("entra")
                 console.log(res.data.find((datos) => datos._id === params.id))
                 cargar(res.data.find((datos) => datos._id === params.id))
@@ -23,6 +27,10 @@ const Formulario = () => {
         }
     }, [params.id])
 
+
+    // const calendar = () => {
+    //   return  <Calendar onChange={onChange} value={value} />
+    // }
 
 
     const [formValues, handleInputChange, reset] = useForm({
@@ -36,6 +44,7 @@ const Formulario = () => {
         estado: "",
         descripcion: ""
     });
+
     const { id, name, publisher, maquina, fecha_entrega, fecha_creacion, estado, descripcion } = formValues;
 
     const cargar = (datos) => {
@@ -53,7 +62,7 @@ const Formulario = () => {
 
     const update = async (e) => {
         e.preventDefault();
-        await axios.put(`http://localhost:4002/api/update-desarrollo/${params.id}`, formValues)
+        await axios.put(`https://desarrollonylon.vercel.app/api/update-desarrollo/${params.id}`, formValues)
             .then(res => {
                 console.log(res);
                 console.log(res.data);
@@ -70,7 +79,7 @@ const Formulario = () => {
 
     const handleRegister = (e) => {
         e.preventDefault();
-        axios.post(`http://localhost:4002/api/regdesarrollo`, formValues)
+        axios.post(`https://desarrollonylon.vercel.app/regdesarrollo`, formValues)
 
             // axios.post(`https://bakend.vercel.app/api/regneedle`, formValues)
             .then(res => {
@@ -88,6 +97,8 @@ const Formulario = () => {
     const handleReturn = () => {
         navigate(-1)
     }
+
+    console.log(value)
 
     return (
         <div>
@@ -164,6 +175,7 @@ const Formulario = () => {
                                     /> </li>
                                 <li className="list-group-item d-flex justify-content-between">
                                     <label className='col-3' htmlFor="fecha_entrega"><b> Fecha de entrega: </b></label>
+                                    {/* <Calendar onChange={onChange} value={value} /> */}
                                     <input
                                         type="text"
                                         className="form-control form-control-sm "
@@ -173,7 +185,8 @@ const Formulario = () => {
                                         onChange={handleInputChange}
                                         required={true}
                                         autoComplete="on"
-                                    /> </li>
+                                    />
+                                </li>
                                 <li className="list-group-item d-flex justify-content-between">
                                     <label className='col-3' htmlFor="estado"><b> Estado: </b></label>
                                     <input

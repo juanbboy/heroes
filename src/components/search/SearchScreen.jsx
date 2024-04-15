@@ -53,14 +53,14 @@ const SearchScreen = () => {
             <div className="row">
                 <div className="col-5">
                     <h3>
-                        Búsqueda de Héroes
+                        Búsqueda de DP's
                     </h3>
 
                     <form onSubmit={handleSubmit} >
 
                         <input
                             type="text"
-                            placeholder="Ingrese el nombre del héroe"
+                            placeholder="Ingrese el nombre del DP"
                             className="form-control mt-4"
                             name="searchText"
                             autoComplete="off"

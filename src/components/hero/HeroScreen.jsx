@@ -31,7 +31,7 @@ const HeroScreen = () => {
             <h1> {hero.id} </h1>
             <hr />
 
-            <div key={hero.id} className="col-4 mx-auto">
+            <div key={hero.id} className="col-sm-4 mx-auto">
                 <div className="card h-100">
                     <div className="col-7 align-self-center d-flex justify-content-center">
                         <img src={`/assets/${hero.id}.jpg`} style={{ maxHeight: '180px', objectFit: 'scale-down' }} className="card-img-top m-1" alt={`${hero.id}1`} />
