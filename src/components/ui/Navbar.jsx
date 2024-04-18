@@ -42,7 +42,12 @@ const Navbar = () => {
                     <NavLink
                         className={({ isActive }) => 'nav-link ' + (isActive ? 'active' : '')}
                         to="/ingreso">
-                        form
+                        Form
+                    </NavLink>
+                    <NavLink
+                        className={({ isActive }) => 'nav-link ' + (isActive ? 'active' : '')}
+                        to="/agenda">
+                        Agenda
                     </NavLink>
 
                 </div>

@@ -7,12 +7,15 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-
+import DatePicker from 'react-date-picker';
+import 'react-date-picker/dist/DatePicker.css';
+import 'react-calendar/dist/Calendar.css';
 const Formulario = () => {
+
+
     const navigate = useNavigate()
     const params = useParams()
     const [datos, setdatos] = useState(0)
-    const [value, onChange] = useState(new Date());
 
 
     useEffect(() => {
@@ -39,8 +42,8 @@ const Formulario = () => {
         name: "",
         publisher: "",
         maquina: "",
-        fecha_entrega: "",
-        fecha_creacion: "",
+        fecha_entrega: new Date(),
+        fecha_creacion: new Date(),
         estado: "",
         descripcion: ""
     });
@@ -59,6 +62,15 @@ const Formulario = () => {
         setdatos(datos)
     }
 
+    const inputstar = (e) => {
+        formValues.fecha_creacion = e
+        setdatos(+1)
+    }
+
+    const inputend = (e) => {
+        formValues.fecha_entrega = e
+        setdatos(+2)
+    }
 
     const update = async (e) => {
         e.preventDefault();
@@ -79,8 +91,8 @@ const Formulario = () => {
 
     const handleRegister = (e) => {
         e.preventDefault();
-        axios.post(`https://desarrollonylon.vercel.app/regdesarrollo`, formValues)
-
+        axios.post(`https://desarrollonylon.vercel.app/api/regdesarrollo`, formValues)
+            // axios.post(`http:///regdesarrollo`, formValues)
             // axios.post(`https://bakend.vercel.app/api/regneedle`, formValues)
             .then(res => {
                 Swal.fire({
@@ -98,7 +110,8 @@ const Formulario = () => {
         navigate(-1)
     }
 
-    console.log(value)
+    // console.log(formValues.fecha_entrega.toLocaleDateString())
+
 
     return (
         <div>
@@ -161,22 +174,30 @@ const Formulario = () => {
                                         required={true}
                                         autoComplete="on"
                                     /> </li>
-                                <li className="list-group-item d-flex justify-content-between">
+                                <li className="list-group-item d-flex ">
                                     <label className='col-3' htmlFor="fecha_creacion"><b> fecha: </b></label>
-                                    <input
-                                        type="text"
-                                        className="form-control form-control-sm "
+                                    <DatePicker
+                                        // type="date"
+                                        onChange={inputstar}
+                                        value={fecha_creacion}
                                         id="fecha_creacion"
                                         name="fecha_creacion"
-                                        value={fecha_creacion}
-                                        onChange={handleInputChange}
                                         required={true}
-                                        autoComplete="on"
-                                    /> </li>
-                                <li className="list-group-item d-flex justify-content-between">
+                                    />
+                                </li>
+                                <li className="list-group-item d-flex ">
                                     <label className='col-3' htmlFor="fecha_entrega"><b> Fecha de entrega: </b></label>
-                                    {/* <Calendar onChange={onChange} value={value} /> */}
-                                    <input
+                                    <DatePicker
+                                        // type="date"
+                                        onChange={inputend}
+                                        value={fecha_entrega}
+                                        id="fecha_entrega"
+                                        name="fecha_entrega"
+                                        required={true}
+                                        minDate={fecha_creacion}
+
+                                    />
+                                    {/* <input
                                         type="text"
                                         className="form-control form-control-sm "
                                         id="fecha_entrega"
@@ -185,7 +206,7 @@ const Formulario = () => {
                                         onChange={handleInputChange}
                                         required={true}
                                         autoComplete="on"
-                                    />
+                                    /> */}
                                 </li>
                                 <li className="list-group-item d-flex justify-content-between">
                                     <label className='col-3' htmlFor="estado"><b> Estado: </b></label>

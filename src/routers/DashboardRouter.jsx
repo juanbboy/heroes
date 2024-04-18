@@ -7,6 +7,7 @@ import SearchScreen from '../components/search/SearchScreen'
 import Navbar from '../components/ui/Navbar'
 import Formulario from '../components/fomulario/Formulario'
 import Imagen from '../components/imagen/Imagen'
+import Calendario from '../components/calendario/Calendario'
 
 
 const DashboardRouter = () => {
@@ -20,6 +21,7 @@ const DashboardRouter = () => {
                     <Route path="/marvel" element={<MarvelScreen />} />
                     <Route path="/search" element={<SearchScreen />} />
                     <Route path="/ingreso" element={< Formulario />} />
+                    <Route path="/agenda" element={< Calendario />} />
 
                     <Route path="/hero/:heroId" element={<HeroScreen />} />
                     <Route path="/img/:id" element={<Imagen />} />
