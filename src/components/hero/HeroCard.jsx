@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-const HeroCard = ({ _id, id, name, maquina, fecha_creacion, fecha_entrega }) => {
+const HeroCard = ({ _id, id, name, maquina, estado, fecha_entrega }) => {
 
     const elimina = async (id) => {
         Swal.fire({
@@ -44,8 +44,8 @@ const HeroCard = ({ _id, id, name, maquina, fecha_creacion, fecha_entrega }) => 
                         <ul className="list-group list-group-flush">
                             <li className="list-group-item"> {name} </li>
                             <li className="list-group-item"> {maquina} </li>
-                            <li className="list-group-item"> {fecha_creacion} </li>
-                            <li className="list-group-item"> {fecha_entrega} </li>
+                            <li className="list-group-item"> {estado} </li>
+                            <li className="list-group-item"> {new Date(fecha_entrega).toLocaleDateString()} </li>
                         </ul>
 
                     </div>

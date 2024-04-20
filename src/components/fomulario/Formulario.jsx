@@ -55,8 +55,8 @@ const Formulario = () => {
         formValues.name = datos.name
         formValues.publisher = datos.publisher
         formValues.maquina = datos.maquina
-        formValues.fecha_entrega = datos.fecha_entrega
-        formValues.fecha_creacion = datos.fecha_creacion
+        formValues.fecha_entrega = new Date(datos.fecha_entrega)
+        formValues.fecha_creacion = new Date(datos.fecha_creacion)
         formValues.estado = datos.estado
         formValues.descripcion = datos.descripcion
         setdatos(datos)
@@ -189,6 +189,8 @@ const Formulario = () => {
                                     <label className='col-3' htmlFor="fecha_entrega"><b> Fecha de entrega: </b></label>
                                     <DatePicker
                                         // type="date"
+                                        showIcon
+                                        toggleCalendarOnIconClick
                                         onChange={inputend}
                                         value={fecha_entrega}
                                         id="fecha_entrega"
