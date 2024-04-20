@@ -189,8 +189,7 @@ const Formulario = () => {
                                     <label className='col-3' htmlFor="fecha_entrega"><b> Fecha de entrega: </b></label>
                                     <DatePicker
                                         // type="date"
-                                        showIcon
-                                        toggleCalendarOnIconClick
+
                                         onChange={inputend}
                                         value={fecha_entrega}
                                         id="fecha_entrega"

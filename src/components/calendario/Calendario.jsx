@@ -29,7 +29,7 @@ const Calendario = () => {
             title: 'Cumpleaños del jefe',
             fecha_creacion: moment().toDate(),
             fecha_entrega: moment().add(2, 'hours').toDate(),
-            notes: 'Comprar el pastel',
+            // notes: 'Comprar el pastel',
             user: {
                 _id: '123',
                 name: 'Fernando'
