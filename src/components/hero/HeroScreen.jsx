@@ -63,21 +63,27 @@ const HeroScreen = () => {
                     </div>
                 </div>
                 <div className='col-sm-8'>
+                    <table striped hover size="sm" responsive="sm">
+                        <thead >
+                            <tr>
+                                <th>Descripcion</th>
+                                <th>Cetme</th>
+                                <th>plano</th>
+                                <th>Cetme</th>
+                                <th>plano</th>
+                                <th>Cetme</th>
+                                <th>plano</th>
+                                <th>Cetme</th>
+                                <th>plano</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <AddDynamicInputFields />
+                            </tr>
 
-                    <thead >
-                        <tr>
-                            <th>Descripcion</th>
-                            <th>Cetme</th>
-                            <th>plano</th>
-                            <th>Cetme</th>
-                            <th>plano</th>
-                            <th>Cetme</th>
-                            <th>plano</th>
-                            <th>Cetme</th>
-                            <th>plano</th>
-                        </tr>
-                    </thead>
-                    <AddDynamicInputFields />
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
