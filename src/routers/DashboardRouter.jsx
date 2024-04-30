@@ -17,15 +17,15 @@ const DashboardRouter = () => {
             <div className="mx-3 my-4">
                 <Routes>
                     <Route path="/" element={<MarvelScreen />} />
-                    <Route path="/dc" element={<DcScreen />} />
-                    <Route path="/marvel" element={<MarvelScreen />} />
+                    <Route path="/seamless" element={<DcScreen />} />
+                    <Route path="/body" element={<MarvelScreen />} />
                     <Route path="/search" element={<SearchScreen />} />
-                    <Route path="/ingreso" element={< Formulario />} />
-                    <Route path="/agenda" element={< Calendario />} />
+                    <Route path="/income" element={< Formulario />} />
+                    <Route path="/agend" element={< Calendario />} />
 
-                    <Route path="/hero/:heroId" element={<HeroScreen />} />
+                    <Route path="/dp/:heroId" element={<HeroScreen />} />
                     <Route path="/img/:id" element={<Imagen />} />
-                    <Route path="/ingreso/edit/:id" element={<Formulario />} />
+                    <Route path="/income/edit/:id" element={<Formulario />} />
                 </Routes>
             </div>
         </>

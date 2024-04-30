@@ -7,41 +7,34 @@ import { messages } from '../../helpers/calendar-messages-es';
 import { AddNewFab } from '../ui/AddNewFab';
 import { uiOpenModal } from '../../actions/ui';
 import { Data } from "../../data/heroes";
+import Modal from 'react-bootstrap/Modal';
+import { Button } from 'react-bootstrap';
+import HeroCard from '../hero/HeroCard';
+import HeroList from '../hero/HeroList';
 
 const localizer = momentLocalizer(moment)
 moment.locale('es');
 
 
 const Calendario = () => {
-    // const data = Data()
-    // const [myEventsList, setmyEventsList] = useState()
+    const data = Data()
+    const [modalShow, setModalShow] = React.useState(false);
+    const handleClose = () => setModalShow(false);
+    const [myEventsList, setmyEventsList] = useState([])
+    const [modal, setModal] = useState([])
+    const dataa = async () => {
+        await data.then((res) => {
+            setmyEventsList(res)
+        })
+    }
 
-    // const dataa = async () => {
-    //     await data.then((res) => setmyEventsList(res.find(hero => hero.id === "DP390N")))
-    // }
+    const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month');
 
 
+    useEffect(() => {
 
-    const myEventsList = [
-
-        {
-            // id: 'askdjhaksdjas',
-            title: 'Cumpleaños del jefe',
-            fecha_creacion: moment().toDate(),
-            fecha_entrega: moment().add(2, 'hours').toDate(),
-            // notes: 'Comprar el pastel',
-            user: {
-                _id: '123',
-                name: 'Fernando'
-            }
-        }
-
-    ]
-
-    // useEffect(() => {
-
-    //     dataa()
-    // }, [])
+        dataa()
+    }, [])
 
 
 
@@ -55,14 +48,18 @@ const Calendario = () => {
         dispatch(uiOpenModal());
     }
 
-    // const onSelectEvent = (e) => {
-    //     dispatch(eventSetActive(e));
-    // }
+    const onSelectEvent = (e) => {
+        setModal(e)
+        console.log(e)
+        setModalShow(true)
 
-    // const onViewChange = (e) => {
-    //     setLastView(e);
-    //     localStorage.setItem('lastView', e);
-    // }
+        // dispatch(eventSetActive(e));
+    }
+
+    const onViewChange = (e) => {
+        setLastView(e);
+        localStorage.setItem('lastView', e);
+    }
 
     // const onSelectSlot = (e) => {
     //     // console.log(e)
@@ -70,43 +67,71 @@ const Calendario = () => {
     // }
 
 
-    const eventStyleGetter = (event, start, end, isSelected) => {
+    const eventStyleGetter = (myEventsList, start, end, isSelected) => {
         const style = {
-            backgroundColor: (uid === event.user._id) ? '#367CF7' : '#465660',
-            borderRadius: '0px',
-            opacity: 0.8,
+            backgroundColor: ("Entregado" === myEventsList.estado) ? '#90ee90' : '#367CF7',
+            borderRadius: '15px',
+            opacity: 0.7,
             display: 'block',
-            color: 'white'
+            color: 'white',
+            height: 21,
+            fontSize: 15,
+            // textAlign: "center"
+            padding: "0px 15px"
         }
         return {
             style
         }
     };
 
-    console.log(myEventsList)
+    if (!myEventsList) return null
+
     return (
         <div>
             <Calendar
-                // icon="fa fa-calendar"
+
                 localizer={localizer}
                 events={myEventsList}
-                startAccessor="fecha_creacion"
+                titleAccessor="id"
+                startAccessor="fecha_entrega"
                 endAccessor="fecha_entrega"
                 messages={messages}
-                style={{ height: 500 }}
-                // selectable={true}
+                style={{ height: 550 }}
+                selectable={true}
                 eventPropGetter={eventStyleGetter}
-                onDoubleClickEvent={onDoubleClick}
-            // onSelectEvent={onSelectEvent}
-            // onView={onViewChange}
-            // onSelectSlot={onSelectSlot}
+                // onDoubleClickEvent={() => setModalShow(true)}
+                onSelectEvent={onSelectEvent}
+                // onView={onViewChange}
+                // onSelectSlot={onSelectSlot}
+                showAllEvents={true}
             />
 
             <AddNewFab />
 
+            <div >
+                <Modal
+                    show={modalShow}
+                    onHide={handleClose}
+                    size="sm"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
 
+                >
+                    <Modal.Header closeButton>
+                        {/* <Modal.Title id="contained-modal-title-vcenter">
+                            {Modal.tipo}
+                        </Modal.Title> */}
+                    </Modal.Header>
+                    <Modal.Body>
+                        <HeroCard key={modal.id}{...modal} />
+                    </Modal.Body>
+
+                    {/* <Modal.Footer>
+                        <Button onClick={handleClose}>Close</Button>
+                    </Modal.Footer> */}
+                </Modal>
+            </div>
         </div>
-
 
     )
 }

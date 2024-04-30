@@ -1,13 +1,15 @@
 import { useParams, Navigate, useNavigate } from 'react-router-dom'
 import { getHeroById } from '../../selectors/getHeroById';
 import React, { useEffect, useMemo, useState } from 'react'
-// import { Table } from 'react-bootstrap';
+import AddDynamicInputFields from '../addfield/AddInputFields';
+// import { Table } from 'react-bootstrap';.
+
 const HeroScreen = () => {
 
     const { heroId } = useParams();
     const navigate = useNavigate()
     const [hero, sethero] = useState()
-    // let { id, name, maquina, fecha_creacion, fecha_entrega, descripcion } = hero;
+    // let { id, name, , fecha_creacion, fecha_entrega, descripcion } = hero;
 
     useEffect(() => {
         data()
@@ -44,9 +46,9 @@ const HeroScreen = () => {
                                 <li className="list-group-item"> <b> Descripción: </b> {hero.name} </li>
                                 <li className="list-group-item"><b> Tipo: </b> {hero.publisher} </li>
                                 <li className="list-group-item"> <b>Maquina: </b> {hero.maquina} </li>
-                                <li className="list-group-item"> <b> fecha de creacion: </b> {hero.fecha_creacion} </li>
-                                <li className="list-group-item"> <b> fecha de entrega: </b> {hero.fecha_entrega} </li>
-                                <li className="list-group-item text-wrap"> <b> Observacion: </b> {hero.descripcion} </li>
+                                <li className="list-group-item"> <b> fecha de creacion: </b> {new Date(hero.fecha_creacion).toLocaleDateString()} </li>
+                                <li className="list-group-item"> <b> fecha de entrega: </b> {new Date(hero.fecha_entrega).toLocaleDateString()} </li>
+                                <li className="list-group-item px-3" style={{ whiteSpace: "pre-wrap" }}><b>Observacion:</b><br />{hero.descripcion} </li>
                             </ul>
 
                         </div>
@@ -60,42 +62,22 @@ const HeroScreen = () => {
                         </div>
                     </div>
                 </div>
-                <div className='col-sm-6'>
-                    <table striped hover size="sm" responsive="sm">
-                        <thead >
-                            <tr>
-                                <th>Codigo</th>
-                                <th>Nombre</th>
-                                <th>G09</th>
-                                <th>G05</th>
-                                <th>1976</th>
-                                <th>1975</th>
-                                <th>7606</th>
-                                <th>7909</th>
-                                <th>0012</th>
-                                <th>0016</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {/* {needle.map((render) => ( */}
-                            <tr>
-                                {/* <td>{render[0]}</td>
-                            <td>{render[1]}</td>
-                            <td>{render[2]}</td>
-                            <td>{render[3]}</td>
-                            <td>{render[4]}</td>
-                            <td>{render[5]}</td>
-                            <td>{render[6]}</td>
-                            <td>{render[7]}</td>
-                            <td>{render[8]}</td>
-                            <td>{render[9]}</td>
-                            <td>{render[10]}</td> */}
-                                {/* <td>{render[11]}</td> */}
-                            </tr>
-                            {/* ))} */}
-                        </tbody>
-                    </table>
+                <div className='col-sm-8'>
+
+                    <thead >
+                        <tr>
+                            <th>Descripcion</th>
+                            <th>Cetme</th>
+                            <th>plano</th>
+                            <th>Cetme</th>
+                            <th>plano</th>
+                            <th>Cetme</th>
+                            <th>plano</th>
+                            <th>Cetme</th>
+                            <th>plano</th>
+                        </tr>
+                    </thead>
+                    <AddDynamicInputFields />
                 </div>
             </div>
         </div>

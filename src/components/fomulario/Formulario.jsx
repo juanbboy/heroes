@@ -110,8 +110,6 @@ const Formulario = () => {
         navigate(-1)
     }
 
-    // console.log(formValues.fecha_entrega.toLocaleDateString())
-
 
     return (
         <div>
@@ -225,7 +223,8 @@ const Formulario = () => {
                                     <label className='col-3' htmlFor="descripcion"><b> Observaciòn: </b></label>
                                     <textarea
                                         type="text"
-                                        className="form-control form-control-sm "
+                                        className="form-control form-control-sm"
+                                        rows={7}
                                         id="descripcion"
                                         name="descripcion"
                                         value={descripcion}
@@ -236,29 +235,31 @@ const Formulario = () => {
                             </ul>
 
                         </div>
-                        <div className="card-footer text-center">
-                            <button
-                                className="btn btn-primary mx-2"
-                                onClick={handleReturn}
-                            >
-                                Regresar
-                            </button>
-                            <button
-                                className="btn btn-primary mx-2"
-                                type="submit"
-                            >
-                                Ingresar
-                            </button>
-                            {params.id ? <button
-                                className="btn btn-primary mx-2"
-                                onClick={update}
-                            >
-                                Actualizar
-                            </button> : ''}
-                        </div>
+
 
                     </div>
                 </form >
+                <div className="card-footer text-center">
+                    <button
+                        className="btn btn-primary mx-2"
+                        onClick={handleReturn}
+                    >
+                        Regresar
+                    </button>
+                    <button
+                        className="btn btn-primary mx-2"
+                        type="submit"
+                        onClick={handleRegister}
+                    >
+                        Ingresar
+                    </button>
+                    {params.id ? <button
+                        className="btn btn-primary mx-2"
+                        onClick={update}
+                    >
+                        Actualizar
+                    </button> : ''}
+                </div>
             </div>
         </div >
     )
