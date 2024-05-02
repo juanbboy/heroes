@@ -10,6 +10,9 @@ import 'react-calendar/dist/Calendar.css';
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
+
+
+
 const Formulario = () => {
 
 
@@ -21,7 +24,8 @@ const Formulario = () => {
     useEffect(() => {
         console.log(params.id)
         if (params.id != null) {
-            axios.get('https://desarrollonylon.vercel.app/api').then((res) => {
+            // axios.get('https://desarrollonylon.vercel.app/api').then((res) => {
+            axios.get('http://localhost:4002/api').then((res) => {
                 console.log("entra")
                 console.log(res.data.find((datos) => datos._id === params.id))
                 cargar(res.data.find((datos) => datos._id === params.id))
@@ -45,7 +49,17 @@ const Formulario = () => {
         fecha_entrega: new Date(),
         fecha_creacion: new Date(),
         estado: "",
-        descripcion: ""
+        descripcion: "",
+        detalle: "",
+        cetme: "",
+        plano: "",
+        cetme1: "",
+        plano1: "",
+        cetme2: "",
+        plano2: "",
+        cetme3: "",
+        plano3: "",
+
     });
 
     const { id, name, publisher, maquina, fecha_entrega, fecha_creacion, estado, descripcion } = formValues;
@@ -91,7 +105,9 @@ const Formulario = () => {
 
     const handleRegister = (e) => {
         e.preventDefault();
-        axios.post(`https://desarrollonylon.vercel.app/api/regdesarrollo`, formValues)
+        console.log(formValues)
+        // axios.post(`https://desarrollonylon.vercel.app/api/regdesarrollo`, formValues)
+        axios.post(`http://localhost:4002/api/regdesarrollo`, formValues)
             // axios.post(`http:///regdesarrollo`, formValues)
             // axios.post(`https://bakend.vercel.app/api/regneedle`, formValues)
             .then(res => {

@@ -23,7 +23,7 @@ const DashboardRouter = () => {
                     <Route path="/income" element={< Formulario />} />
                     <Route path="/agend" element={< Calendario />} />
 
-                    <Route path="/dp/:heroId" element={<HeroScreen />} />
+                    <Route path="/dp/:id" element={<HeroScreen />} />
                     <Route path="/img/:id" element={<Imagen />} />
                     <Route path="/income/edit/:id" element={<Formulario />} />
                 </Routes>

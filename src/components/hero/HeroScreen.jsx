@@ -1,12 +1,11 @@
 import { useParams, Navigate, useNavigate } from 'react-router-dom'
-import { getHeroById } from '../../selectors/getHeroById';
+import { getBy_id } from '../../selectors/getBy_id';
 import React, { useEffect, useMemo, useState } from 'react'
 import AddDynamicInputFields from '../addfield/AddInputFields';
-// import { Table } from 'react-bootstrap';.
 
 const HeroScreen = () => {
 
-    const { heroId } = useParams();
+    const { id } = useParams();
     const navigate = useNavigate()
     const [hero, sethero] = useState()
     // let { id, name, , fecha_creacion, fecha_entrega, descripcion } = hero;
@@ -16,7 +15,7 @@ const HeroScreen = () => {
     }, [])
 
     const data = async () => {
-        await getHeroById(heroId).then((res) => {
+        await getBy_id(id).then((res) => {
             sethero(res)
             console.log(res)
         })
@@ -63,7 +62,7 @@ const HeroScreen = () => {
                     </div>
                 </div>
                 <div className='col-sm-8'>
-                    <table striped hover size="sm" responsive="sm">
+                    {/* <Table striped hover size="sm" responsive="sm">
                         <thead >
                             <tr>
                                 <th>Descripcion</th>
@@ -78,12 +77,13 @@ const HeroScreen = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <AddDynamicInputFields />
-                            </tr>
+                            <tr> */}
+                    <AddDynamicInputFields />
+                    {/* </tr>
 
                         </tbody>
-                    </table>
+                    </Table> */}
+
                 </div>
             </div>
         </div>

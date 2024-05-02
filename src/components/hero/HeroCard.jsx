@@ -51,7 +51,7 @@ const HeroCard = ({ _id, id, name, maquina, estado, fecha_entrega }) => {
                     </div>
                     <div className="card-footer d-flex justify-content-between">
                         <div>
-                            <Link to={`/dp/${id}`}>
+                            <Link to={`/dp/${_id}`}>
                                 Ver más ...
                             </Link>
                         </div>

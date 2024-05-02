@@ -1,60 +1,195 @@
 import { useState } from "react";
 import { useForm } from "../../hooks/useForm";
-
+import { Table } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function App() {
-  const [formFields, setFormFields] = useState([
-    { name: '', age: '' },
-  ])
+
+  const params = useParams()
+
+  const [formValues, handleInputChange, reset] = useForm([
+    {
+      detalle: '',
+      cetme: '',
+      plano: "",
+      cetme1: '',
+      plano1: "",
+      cetme2: '',
+      plano2: "",
+      cetme3: '',
+      plano3: "",
+    }],
+  )
+
+  const { detalle,
+    cetme,
+    plano,
+    cetme1,
+    plano1,
+    cetme2,
+    plano2,
+    cetme3,
+    plano3, } = formValues;
+
 
   const handleFormChange = (event, index) => {
-    let data = [...formFields];
+    let data = [...formValues];
     data[index][event.target.name] = event.target.value;
-    setFormFields(data);
+    // handleInputChange(data);
   }
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    console.log(formFields)
+    console.log(formValues)
+    await axios.put(`http://localhost:4002/api/update-desarrollo/${params.id}`, formValues)
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        Swal.fire({
+          icon: 'success',
+          title: 'Actualizado',
+          showConfirmButton: false,
+          timer: 1200
+        })
+        // handleReturn()
+      })
   }
+
+
+  // const submit = (e) => {
+  //   e.preventDefault();
+  //   console.log(formValues)
+  // }
 
   const addFields = () => {
     let object = {
-      name: '',
-      age: ''
+      descripcion: '',
+      cetme: '',
+      plano: "",
+      cetme1: '',
+      plano1: "",
+      cetme2: '',
+      plano2: "",
+      cetme3: '',
+      plano3: "",
     }
 
-    setFormFields([...formFields, object])
+    handleInputChange([...formValues, object])
   }
 
   const removeFields = (index) => {
-    let data = [...formFields];
+    let data = [...formValues];
     data.splice(index, 1)
-    setFormFields(data)
+    handleInputChange(data)
   }
 
   return (
-    <div className="App">
+    <div>
       <form onSubmit={submit}>
-        {formFields.map((form, index) => {
-          return (
-            <div key={index}>
-              <input
-                name='name'
-                placeholder='Name'
-                onChange={event => handleFormChange(event, index)}
-                value={form.name}
-              />
-              <input
-                name='age'
-                placeholder='Age'
-                onChange={event => handleFormChange(event, index)}
-                value={form.age}
-              />
-              <button onClick={() => removeFields(index)}>Remove</button>
-            </div>
-          )
-        })}
+        <Table striped hover size="sm" responsive="sm">
+          <thead >
+            <tr>
+              <th>Descripcion</th>
+              <th>Cetme</th>
+              <th>plano</th>
+              <th>Cetme</th>
+              <th>plano</th>
+              <th>Cetme</th>
+              <th>plano</th>
+              <th>Cetme</th>
+              <th>plano</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+
+
+              {formValues.map((form, index) => {
+                return (
+                  <div key={index}>
+                    <td>
+                      <input
+                        className="form-control form-control-sm"
+                        name='descripcion'
+                        onChange={event => handleFormChange(event, index)}
+                        value={form.descripcion}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        className="form-control form-control-sm"
+                        name='cetme'
+                        onChange={event => handleFormChange(event, index)}
+                        value={form.cetme}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        className="form-control form-control-sm"
+                        name='plano'
+                        onChange={event => handleFormChange(event, index)}
+                        value={form.plano}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        className="form-control form-control-sm"
+                        name='cetme1'
+                        onChange={event => handleFormChange(event, index)}
+                        value={form.cetme1}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        className="form-control form-control-sm"
+                        name='plano1'
+                        onChange={event => handleFormChange(event, index)}
+                        value={form.plano1}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        className="form-control form-control-sm"
+                        name='cetme2'
+                        onChange={event => handleFormChange(event, index)}
+                        value={form.cetme2}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        className="form-control form-control-sm"
+                        name='plano2'
+                        onChange={event => handleFormChange(event, index)}
+                        value={form.plano2}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        className="form-control form-control-sm"
+                        name='cetme3'
+                        onChange={event => handleFormChange(event, index)}
+                        value={form.cetme3}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        className="form-control form-control-sm"
+                        name='plano3'
+                        onChange={event => handleFormChange(event, index)}
+                        value={form.plano3}
+                      />
+                    </td>
+                    {/* <button onClick={() => removeFields(index)}>Remove</button> */}
+                  </div>
+
+                )
+              })}
+            </tr>
+
+          </tbody>
+        </Table>
       </form>
       <button onClick={addFields}>Add More..</button>
       <br />
