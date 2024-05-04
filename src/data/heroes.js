@@ -10,3 +10,14 @@ export const Data = async () => {
 
     return data
 }
+
+export const Datamedida = async () => {
+    let data
+    await axios.get('http://localhost:4002/api/medidas').then((res) => {
+
+        data = (res.data)
+        console.log(res.data)
+    })
+
+    return data
+}
