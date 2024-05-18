@@ -112,8 +112,6 @@ const AddInputFields = () => {
   // }
 
 
-
-
   // const submit = (e) => {
   //   e.preventDefault();
   //   console.log(formValues)
@@ -160,9 +158,7 @@ const AddInputFields = () => {
           </thead>
           <tbody>
             {formValues.map((form, index) => (
-
               <tr key={index}>
-
                 <td>
                   <input
                     className="form-control form-control-sm"
