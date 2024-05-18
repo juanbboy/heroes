@@ -1,4 +1,4 @@
-import { useParams, Navigate, useNavigate } from 'react-router-dom'
+import { useParams, Navigate, useNavigate, Link } from 'react-router-dom'
 import { getBy_id } from '../../selectors/getBy_id';
 import React, { useEffect, useMemo, useState } from 'react'
 import AddDynamicInputFields from '../addfield/AddInputFields';
@@ -9,6 +9,8 @@ const HeroScreen = () => {
     const { id } = useParams();
     const navigate = useNavigate()
     const [hero, sethero] = useState()
+    const [dpmedidas, setDpmedidas] = useState()
+
     // let { id, name, , fecha_creacion, fecha_entrega, descripcion } = hero;
 
     useEffect(() => {
@@ -21,6 +23,8 @@ const HeroScreen = () => {
             sethero(res)
             console.log(res)
         })
+        // await Datamedida().then((res) => setDpmedidas(res.find(res => res.id === id)))
+
     }
 
     if (!hero) return null
@@ -37,8 +41,14 @@ const HeroScreen = () => {
                 <div key={hero.id} className="col-sm-4 ">
                     <div className="card h-100">
                         <div className="col-7 align-self-center d-flex justify-content-center">
-                            <img src={`/assets/${hero.id}.jpg`} style={{ maxHeight: '180px', objectFit: 'scale-down' }} className="card-img-top m-1" alt={`${hero.id}1`} />
-                            <img src={`/assets/${hero.id}1.jpg`} style={{ maxHeight: '180px', objectFit: 'scale-down' }} className="card-img-top m-1" alt={`${hero.id}1`} />
+                            {/* <img src={`/assets/${hero.id}.jpg`} style={{ maxHeight: '180px', objectFit: 'scale-down' }} className="card-img-top m-1" alt={`${hero.id}1`} /> */}
+                            {/* <img src={`/assets/${hero.id}1.jpg`} style={{ maxHeight: '180px', objectFit: 'scale-down' }} className="card-img-top m-1" alt={`${hero.id}1`} /> */}
+                            <Link to={`/img/${hero.id}`} className='align-self-center d-flex justify-content-center' >
+                                <img loading="lazy" src={`/assets/${hero.id}.jpg`} style={{ height: '210px', width: "120px" }} className="card-img-top m-1" alt={hero.id} />
+                            </Link>
+                            <Link to={`/img/${hero.id}1`} className='align-self-center d-flex justify-content-center' >
+                                <img loading="lazy" src={`/assets/${hero.id}1.jpg`} style={{ height: '210px', width: "120px" }} className="card-img-top m-1" alt={`${hero.id}1`} />
+                            </Link>
                         </div>
                         <div className="card-body">
                             {/* <h3 className="card-title">{id}</h3> */}
@@ -80,7 +90,7 @@ const HeroScreen = () => {
                         </thead>
                         <tbody>
                             <tr> */}
-                    <AddDynamicInputFields />
+                    <AddDynamicInputFields {...dpmedidas} />
                     {/* </tr>
 
                         </tbody>

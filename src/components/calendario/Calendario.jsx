@@ -4,7 +4,6 @@ import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { messages } from '../../helpers/calendar-messages-es';
-import { AddNewFab } from '../ui/AddNewFab';
 import { uiOpenModal } from '../../actions/ui';
 import { Data } from "../../data/heroes";
 import Modal from 'react-bootstrap/Modal';
@@ -22,14 +21,14 @@ const Calendario = () => {
     const handleClose = () => setModalShow(false);
     const [myEventsList, setmyEventsList] = useState([])
     const [modal, setModal] = useState([])
+    const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month');
+
+
     const dataa = async () => {
         await data.then((res) => {
             setmyEventsList(res)
         })
     }
-
-    const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month');
-
 
     useEffect(() => {
 
@@ -38,15 +37,13 @@ const Calendario = () => {
 
 
 
-
-
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const { uid } = useSelector(state => state.auth);
 
-    const onDoubleClick = (e) => {
-        // console.log(e);
-        dispatch(uiOpenModal());
-    }
+    // const onDoubleClick = (e) => {
+    //     // console.log(e);
+    //     dispatch(uiOpenModal());
+    // }
 
     const onSelectEvent = (e) => {
         setModal(e)
@@ -94,25 +91,24 @@ const Calendario = () => {
                 events={myEventsList}
                 titleAccessor="id"
                 startAccessor="fecha_entrega"
-                endAccessor="fecha_entrega"
+                endAccessor={(myEventsList) => { return moment(myEventsList.fecha_entrega).add(1, 'h').format() }}
                 messages={messages}
                 style={{ height: 550 }}
                 selectable={true}
                 eventPropGetter={eventStyleGetter}
                 // onDoubleClickEvent={() => setModalShow(true)}
                 onSelectEvent={onSelectEvent}
-                // onView={onViewChange}
+                onView={onViewChange}
                 // onSelectSlot={onSelectSlot}
                 showAllEvents={true}
+                view={lastView}
             />
-
-            <AddNewFab />
 
             <div >
                 <Modal
                     show={modalShow}
                     onHide={handleClose}
-                    size="sm"
+                    // size="sm"
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
 

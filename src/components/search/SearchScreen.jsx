@@ -4,6 +4,7 @@ import { useForm } from '../../hooks/useForm';
 import queryString from 'query-string'
 import { getHeroesByName } from '../../selectors/getHeroesByName';
 import HeroCard from '../hero/HeroCard';
+import { getByEstado } from '../../selectors/getByEstado';
 
 const SearchScreen = () => {
 
@@ -25,6 +26,9 @@ const SearchScreen = () => {
 
     const search = async (e) => {
         await getHeroesByName(e).then((res) => {
+            setsearchHeroes(res)
+            console.log(res)
+        }) || getByEstado(e).then((res) => {
             setsearchHeroes(res)
             console.log(res)
         })
@@ -82,7 +86,7 @@ const SearchScreen = () => {
                     </h3>
                     <hr />
                     {
-                        searchHeroes.map(hero => <div className='p-1'><HeroCard key={hero.id} {...hero} /> </div>)
+                        searchHeroes.map(hero => <div className='p-1 col-8'><HeroCard key={hero.id} {...hero} /> </div>)
                     }
                 </div>
             </div>

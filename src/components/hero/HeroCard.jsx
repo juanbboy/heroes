@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const HeroCard = ({ _id, id, name, maquina, estado, fecha_entrega }) => {
@@ -32,10 +32,10 @@ const HeroCard = ({ _id, id, name, maquina, estado, fecha_entrega }) => {
                 <div className="card w-100" >
                     <div className="col-8 align-self-center d-flex justify-content-center">
                         <Link to={`/img/${id}`} className='align-self-center d-flex justify-content-center' >
-                            <img src={`/assets/${id}.jpg`} style={{ height: '150px', width: "100px" }} className="card-img-top m-1" alt={id} />
+                            <img loading="lazy" src={`/assets/${id}.jpg`} style={{ height: '150px', width: "100px" }} className="card-img-top m-1" alt={id} />
                         </Link>
                         <Link to={`/img/${id}1`} className='align-self-center d-flex justify-content-center' >
-                            <img src={`/assets/${id}1.jpg`} style={{ height: '150px', width: "100px" }} className="card-img-top m-1" alt={`${id}1`} />
+                            <img loading="lazy" src={`/assets/${id}1.jpg`} style={{ height: '150px', width: "100px" }} className="card-img-top m-1" alt={`${id}1`} />
                         </Link>
                     </div>
                     <div className="card-body">

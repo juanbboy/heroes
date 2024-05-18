@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "../../hooks/useForm";
 import { Table } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-function App() {
+const AddInputFields = () => {
+
+  const [datos, setdatos] = useState()
 
   const params = useParams()
 
-  const [formValues, handleInputChange, reset] = useForm(
-    {
+  const [formValues, setformValues] = useState(
+    [{
       detalle: '',
       cetme: '',
       plano: "",
@@ -21,26 +23,53 @@ function App() {
       cetme3: '',
       plano3: "",
       id: params.id
-    },
+    }]
   )
 
-  const { detalle,
-    cetme,
-    plano,
-    cetme1,
-    plano1,
-    cetme2,
-    plano2,
-    cetme3,
-    plano3,
-    id } = formValues;
+  // const { detalle,
+  //   cetme,
+  //   plano,
+  //   cetme1,
+  //   plano1,
+  //   cetme2,
+  //   plano2,
+  //   cetme3,
+  //   plano3,
+  //   id } = formValues;
 
+  // useEffect(() => {
+  //   cargar()
+
+  // }, [params.id])
+
+
+
+
+  // const cargar = (datos) => {
+  //   formValues.cetme = datos.cetme
+  //   formValues.plano = datos.plano
+  //   formValues.cetme1 = datos.cetme1
+  //   formValues.plano1 = datos.plano1
+  //   formValues.cetme2 = datos.cetme2
+  //   formValues.plano2 = datos.plano2
+  //   formValues.cetme3 = datos.cetme3
+  //   formValues.plano3 = datos.plano3
+  //   setdatos(datos)
+  // }
 
   // const handleFormChange = (event, index) => {
   //   let data = { ...formValues };
   //   data[index][event.target.name] = event.target.value;
   //   // handleInputChange(data);
   // }
+
+  const handleInputChange = (e, index) => {
+    // const { name, value } = e.target;
+    const list = [...formValues];
+    list[index][e.target.name] = e.target.value;
+    setformValues(list);
+  };
+
 
   // const submit = async (e) => {
   //   e.preventDefault();
@@ -62,8 +91,8 @@ function App() {
   const handleRegister = (e) => {
     e.preventDefault();
     console.log(formValues)
-    // axios.post(`https://desarrollonylon.vercel.app/api/regdesarrollo`, formValues)
-    axios.post(`http://localhost:4002/api/regmedidas`, formValues)
+    // axios.post(`https://desarrollonylon.vercel.app/api/regmedidas`, formValues)
+    axios.post(`http://localhost:4002/api/regmedidas`, { formValues })
       // axios.post(`http:///regdesarrollo`, formValues)
       // axios.post(`https://bakend.vercel.app/api/regneedle`, formValues)
       .then(res => {
@@ -91,7 +120,7 @@ function App() {
   // }
 
   const addFields = () => {
-    let object = {
+    setformValues([...formValues, {
       detalle: '',
       cetme: '',
       plano: "",
@@ -101,9 +130,9 @@ function App() {
       plano2: "",
       cetme3: '',
       plano3: "",
-    }
+      id: params.id
+    }])
 
-    handleInputChange([...formValues, object])
   }
 
   const removeFields = (index) => {
@@ -130,100 +159,98 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              {/* {formValues.map((form, index) => { */}
-              return (
-              <div >
+            {formValues.map((form, index) => (
+
+              <tr key={index}>
+
                 <td>
                   <input
                     className="form-control form-control-sm"
                     name='detalle'
-                    onChange={event => handleInputChange(event)}
-                    value={detalle}
+                    onChange={e => handleInputChange(e, index)}
+                    value={form.detalle}
                   />
                 </td>
                 <td>
                   <input
                     className="form-control form-control-sm"
                     name='cetme'
-                    onChange={event => handleInputChange(event)}
-                    value={cetme}
+                    onChange={e => handleInputChange(e, index)}
+                    value={form.cetme}
                   />
                 </td>
                 <td>
                   <input
                     className="form-control form-control-sm"
                     name='plano'
-                    onChange={event => handleInputChange(event)}
-                    value={plano}
+                    onChange={e => handleInputChange(e, index)}
+                    value={form.plano}
                   />
                 </td>
                 <td>
                   <input
                     className="form-control form-control-sm"
                     name='cetme1'
-                    onChange={event => handleInputChange(event)}
-                    value={cetme1}
+                    onChange={e => handleInputChange(e, index)}
+                    value={form.cetme1}
                   />
                 </td>
                 <td>
                   <input
                     className="form-control form-control-sm"
                     name='plano1'
-                    onChange={event => handleInputChange(event)}
-                    value={plano1}
+                    onChange={e => handleInputChange(e, index)}
+                    value={form.plano1}
                   />
                 </td>
                 <td>
                   <input
                     className="form-control form-control-sm"
                     name='cetme2'
-                    onChange={event => handleInputChange(event)}
-                    value={cetme2}
+                    onChange={e => handleInputChange(e, index)}
+                    value={form.cetme2}
                   />
                 </td>
                 <td>
                   <input
                     className="form-control form-control-sm"
                     name='plano2'
-                    onChange={event => handleInputChange(event)}
-                    value={plano2}
+                    onChange={e => handleInputChange(e, index)}
+                    value={form.plano2}
                   />
                 </td>
                 <td>
                   <input
                     className="form-control form-control-sm"
                     name='cetme3'
-                    onChange={event => handleInputChange(event)}
-                    value={cetme3}
+                    onChange={e => handleInputChange(e, index)}
+                    value={form.cetme3}
                   />
                 </td>
                 <td>
                   <input
                     className="form-control form-control-sm"
                     name='plano3'
-                    onChange={event => handleInputChange(event)}
-                    value={plano3}
+                    onChange={e => handleInputChange(e, index)}
+                    value={form.plano3}
                   />
                 </td>
                 {/* <button onClick={() => removeFields(index)}>Remove</button> */}
-              </div>
 
-              )
-              {/* })} */}
-            </tr>
-
+              </tr>
+            ))}
           </tbody>
         </Table>
       </form>
       <button onClick={addFields}>Add More..</button>
       <br />
       <button onClick={handleRegister}>Submit</button>
+      <h5>{JSON.stringify(formValues)}</h5>
     </div>
   );
 }
 
-export default App;
+export default AddInputFields;
 
 
 
@@ -283,7 +310,7 @@ export default App;
 //             id="descripcion"
 //             name="descripcion"
 //             value={item.descripcion}
-//             onChange={event => handleInputChange(event)}
+//             onChange={e => handleInputChange(e,index)}
 //             required={true}
 //             autoComplete="on"
 //           /></td>
@@ -293,7 +320,7 @@ export default App;
 //             id="cetme"
 //             name="cetme"
 //             value={item.cetme}
-//             onChange={event => handleInputChange(event)}
+//             onChange={e => handleInputChange(e,index)}
 //             required={true}
 //             autoComplete="on"
 //           /></td>
@@ -303,7 +330,7 @@ export default App;
 //             id="plano"
 //             name="plano"
 //             value={item.plano}
-//             onChange={event => handleInputChange(event)}
+//             onChange={e => handleInputChange(e,index)}
 //             required={true}
 //             autoComplete="on"
 //           /></td>
@@ -313,7 +340,7 @@ export default App;
 //             id="cetme1"
 //             name="cetme1"
 //             value={item.cetme1}
-//             onChange={event => handleInputChange(event)}
+//             onChange={e => handleInputChange(e,index)}
 //             required={true}
 //             autoComplete="on"
 //           /></td>
@@ -323,7 +350,7 @@ export default App;
 //             id="plano1"
 //             name="plano1"
 //             value={item.plano1}
-//             onChange={event => handleInputChange(event)}
+//             onChange={e => handleInputChange(e,index)}
 //             required={true}
 //             autoComplete="on"
 //           /></td> <td><input
@@ -332,7 +359,7 @@ export default App;
 //             id="cetme2"
 //             name="cetme2"
 //             value={item.cetme2}
-//             onChange={event => handleInputChange(event)}
+//             onChange={e => handleInputChange(e,index)}
 //             required={true}
 //             autoComplete="on"
 //           /></td>
@@ -342,7 +369,7 @@ export default App;
 //             id="plano2"
 //             name="plano2"
 //             value={item.plano2}
-//             onChange={event => handleInputChange(event)}
+//             onChange={e => handleInputChange(e,index)}
 //             required={true}
 //             autoComplete="on"
 //           /></td> <td><input
@@ -351,7 +378,7 @@ export default App;
 //             id="cetme3"
 //             name="cetme3"
 //             value={item.cetme3}
-//             onChange={event => handleInputChange(event)}
+//             onChange={e => handleInputChange(e,index)}
 //             required={true}
 //             autoComplete="on"
 //           /></td>
@@ -361,7 +388,7 @@ export default App;
 //             id="plano3"
 //             name="plano3"
 //             value={item.plano3}
-//             onChange={event => handleInputChange(event)}
+//             onChange={e => handleInputChange(e,index)}
 //             required={true}
 //             autoComplete="on"
 //           /></td>

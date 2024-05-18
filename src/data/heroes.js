@@ -16,7 +16,7 @@ export const Datamedida = async () => {
     await axios.get('http://localhost:4002/api/medidas').then((res) => {
 
         data = (res.data)
-        console.log(res.data)
+        console.log(res.data, "medidas")
     })
 
     return data

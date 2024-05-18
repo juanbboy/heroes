@@ -24,8 +24,8 @@ const Formulario = () => {
     useEffect(() => {
         console.log(params.id)
         if (params.id != null) {
-            // axios.get('https://desarrollonylon.vercel.app/api').then((res) => {
-            axios.get('http://localhost:4002/api').then((res) => {
+            axios.get('https://desarrollonylon.vercel.app/api').then((res) => {
+                // axios.get('http://localhost:4002/api').then((res) => {
                 console.log("entra")
                 console.log(res.data.find((datos) => datos._id === params.id))
                 cargar(res.data.find((datos) => datos._id === params.id))
@@ -106,8 +106,8 @@ const Formulario = () => {
     const handleRegister = (e) => {
         e.preventDefault();
         console.log(formValues)
-        // axios.post(`https://desarrollonylon.vercel.app/api/regdesarrollo`, formValues)
-        axios.post(`http://localhost:4002/api/regdesarrollo`, formValues)
+        axios.post(`https://desarrollonylon.vercel.app/api/regdesarrollo`, formValues)
+            // axios.post(`http://localhost:4002/api/regdesarrollo`, formValues)
             // axios.post(`http:///regdesarrollo`, formValues)
             // axios.post(`https://bakend.vercel.app/api/regneedle`, formValues)
             .then(res => {
