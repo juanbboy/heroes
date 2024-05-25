@@ -55,7 +55,7 @@ const AddInputFields = ({ crudo, tit_tabla }) => {
 
   const update = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:4002/api/update-desarrollo/${params.id}`, { tit_tabla: talla, crudo: formValues })
+    await axios.put(`https://desarrollonylon.vercel.app/api/update-desarrollo/${params.id}`, { tit_tabla: talla, crudo: formValues })
       .then(res => {
         console.log(res);
         console.log(res.data);
