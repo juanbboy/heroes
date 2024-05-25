@@ -5,11 +5,18 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const AddInputFields = () => {
-
-  const [datos, setdatos] = useState()
+const AddInputFields = ({ crudo, tit_tabla }) => {
 
   const params = useParams()
+
+  const [talla, setTalla] = useState([
+    {
+      uno: '',
+      dos: '',
+      tres: '',
+      cuatro: ''
+    }]
+  )
 
   const [formValues, setformValues] = useState(
     [{
@@ -22,100 +29,45 @@ const AddInputFields = () => {
       plano2: "",
       cetme3: '',
       plano3: "",
-      id: params.id
     }]
   )
 
-  // const { detalle,
-  //   cetme,
-  //   plano,
-  //   cetme1,
-  //   plano1,
-  //   cetme2,
-  //   plano2,
-  //   cetme3,
-  //   plano3,
-  //   id } = formValues;
+  useEffect(() => {
+    if (crudo) {
+      setformValues(crudo)
+    } if (tit_tabla) {
+      setTalla(tit_tabla)
+    }
+  }, [params.id])
 
-  // useEffect(() => {
-  //   cargar()
-
-  // }, [params.id])
-
-
-
-
-  // const cargar = (datos) => {
-  //   formValues.cetme = datos.cetme
-  //   formValues.plano = datos.plano
-  //   formValues.cetme1 = datos.cetme1
-  //   formValues.plano1 = datos.plano1
-  //   formValues.cetme2 = datos.cetme2
-  //   formValues.plano2 = datos.plano2
-  //   formValues.cetme3 = datos.cetme3
-  //   formValues.plano3 = datos.plano3
-  //   setdatos(datos)
-  // }
-
-  // const handleFormChange = (event, index) => {
-  //   let data = { ...formValues };
-  //   data[index][event.target.name] = event.target.value;
-  //   // handleInputChange(data);
-  // }
+  const InputChange = (e) => {
+    const list = [...talla];
+    list[0][e.target.name] = e.target.value;
+    setTalla(list);
+    console.log(list)
+  };
 
   const handleInputChange = (e, index) => {
-    // const { name, value } = e.target;
     const list = [...formValues];
     list[index][e.target.name] = e.target.value;
     setformValues(list);
   };
 
-
-  // const submit = async (e) => {
-  //   e.preventDefault();
-  //   console.log(formValues)
-  //   await axios.put(`http://localhost:4002/api/update-desarrollo/${params.id}`, formValues)
-  //     .then(res => {
-  //       console.log(res);
-  //       console.log(res.data);
-  //       Swal.fire({
-  //         icon: 'success',
-  //         title: 'Actualizado',
-  //         showConfirmButton: false,
-  //         timer: 1200
-  //       })
-  //       // handleReturn()
-  //     })
-  // }
-
-  const handleRegister = (e) => {
+  const update = async (e) => {
     e.preventDefault();
-    console.log(formValues)
-    // axios.post(`https://desarrollonylon.vercel.app/api/regmedidas`, formValues)
-    axios.post(`http://localhost:4002/api/regmedidas`, { formValues })
-      // axios.post(`http:///regdesarrollo`, formValues)
-      // axios.post(`https://bakend.vercel.app/api/regneedle`, formValues)
+    await axios.put(`http://localhost:4002/api/update-desarrollo/${params.id}`, { tit_tabla: talla, crudo: formValues })
       .then(res => {
+        console.log(res);
+        console.log(res.data);
         Swal.fire({
           icon: 'success',
-          title: 'correcto',
+          title: 'Actualizado',
           showConfirmButton: false,
           timer: 1200
         })
-        // reset();
-        // navigate("/needlelist")
+
       })
   }
-
-  // const handleReturn = () => {
-  //   navigate(-1)
-  // }
-
-
-  // const submit = (e) => {
-  //   e.preventDefault();
-  //   console.log(formValues)
-  // }
 
   const addFields = () => {
     setformValues([...formValues, {
@@ -128,7 +80,6 @@ const AddInputFields = () => {
       plano2: "",
       cetme3: '',
       plano3: "",
-      id: params.id
     }])
 
   }
@@ -141,9 +92,51 @@ const AddInputFields = () => {
 
   return (
     <div>
-      <form onSubmit={handleRegister}>
-        <Table striped hover size="sm" responsive="sm">
-          <thead >
+      <form onSubmit={update}>
+        <Table className="table" size="sm" responsive="sm">
+          {talla.map((talla) => (
+            <thead className="text-center" >
+              <th></th>
+              <th colspan="2" >
+                <input
+                  className="form-control form-control-sm text-center p-0 m-0 "
+                  name='uno'
+                  onChange={e => InputChange(e)}
+                  value={talla.uno}
+                  style={{ border: "0", fontWeight: "bold" }}
+                />
+              </th>
+              <th colspan="2">
+                <input
+                  className="form-control form-control-sm text-center p-0 m-0 "
+                  name='dos'
+                  onChange={e => InputChange(e)}
+                  value={talla.dos}
+                  style={{ border: "0", fontWeight: "bold" }}
+                />
+              </th>
+              <th colspan="2">
+                <input
+                  className="form-control form-control-sm text-center p-0 m-0 "
+                  name='tres'
+                  onChange={e => InputChange(e)}
+                  value={talla.tres}
+                  style={{ border: "0", fontWeight: "bold" }}
+                />
+              </th>
+              <th colspan="2">
+                <input
+                  className="form-control form-control-sm text-center p-0 m-0"
+                  name='cuatro'
+                  onChange={e => InputChange(e)}
+                  value={talla.cuatro}
+                  style={{ border: "0", fontWeight: "bold" }}
+                />
+              </th>
+
+            </thead>
+          ))}
+          <thead className="text-center p-0 m-0">
             <tr>
               <th>Descripcion</th>
               <th>Cetme</th>
@@ -158,77 +151,86 @@ const AddInputFields = () => {
           </thead>
           <tbody>
             {formValues.map((form, index) => (
-              <tr key={index}>
-                <td>
+              <tr key={index} >
+                <td >
                   <input
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm "
                     name='detalle'
                     onChange={e => handleInputChange(e, index)}
                     value={form.detalle}
+                    style={{ border: "0" }}
                   />
                 </td>
                 <td>
                   <input
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center"
                     name='cetme'
                     onChange={e => handleInputChange(e, index)}
                     value={form.cetme}
+                    style={{ border: "0" }}
                   />
                 </td>
                 <td>
                   <input
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center"
                     name='plano'
                     onChange={e => handleInputChange(e, index)}
                     value={form.plano}
+                    style={{ border: "0" }}
                   />
                 </td>
                 <td>
                   <input
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center"
                     name='cetme1'
                     onChange={e => handleInputChange(e, index)}
                     value={form.cetme1}
+                    style={{ border: "0" }}
                   />
                 </td>
                 <td>
                   <input
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center"
                     name='plano1'
                     onChange={e => handleInputChange(e, index)}
                     value={form.plano1}
+                    style={{ border: "0" }}
                   />
                 </td>
                 <td>
                   <input
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center"
                     name='cetme2'
                     onChange={e => handleInputChange(e, index)}
                     value={form.cetme2}
+                    style={{ border: "0" }}
                   />
                 </td>
                 <td>
                   <input
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center"
                     name='plano2'
                     onChange={e => handleInputChange(e, index)}
                     value={form.plano2}
+                    style={{ border: "0" }}
                   />
                 </td>
                 <td>
                   <input
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center"
                     name='cetme3'
                     onChange={e => handleInputChange(e, index)}
                     value={form.cetme3}
+                    style={{ border: "0" }}
                   />
                 </td>
                 <td>
                   <input
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center"
                     name='plano3'
                     onChange={e => handleInputChange(e, index)}
                     value={form.plano3}
+                    style={{ border: "0" }}
                   />
                 </td>
                 {/* <button onClick={() => removeFields(index)}>Remove</button> */}
@@ -238,10 +240,8 @@ const AddInputFields = () => {
           </tbody>
         </Table>
       </form>
-      <button onClick={addFields}>Add More..</button>
-      <br />
-      <button onClick={handleRegister}>Submit</button>
-      <h5>{JSON.stringify(formValues)}</h5>
+      <button onClick={addFields}>Add More...</button>
+      <button onClick={update}>Guardar</button>
     </div>
   );
 }
@@ -250,160 +250,7 @@ export default AddInputFields;
 
 
 
-// export default function AddDynamicInputFields() {
-
-
-//   const [inputs, setInputs] = useState([{
-//     descripcion: "",
-//     cetme: "",
-//     plano: "",
-//     cetme1: "",
-//     plano1: "",
-//     cetme2: "",
-//     plano2: "",
-//     cetme3: "",
-//     plano3: "",
-//   }]);
 
 
 
-//   const handleAddInput = () => {
-//     setInputs([...inputs, {
-//       descripcion: "",
-//       cetme: "",
-//       plano: "",
-//       cetme1: "",
-//       plano1: "",
-//       cetme2: "",
-//       plano2: "",
-//       cetme3: "",
-//       plano3: "",
-//     }]);
-//   };
 
-//   const handleInputChange = (event, index) => {
-//     let data = [...inputs];
-//     data[index][event.target.name] = event.target.value;
-//     setInputs(inputs);
-//   }
-
-//   const handleDeleteInput = (index) => {
-//     const newArray = [...inputs];
-//     newArray.splice(index, 1);
-//     setInputs(newArray);
-//   };
-
-//   console.log(inputs)
-
-//   return (
-//     <div className="container">
-
-//       {inputs.map((item, index) => (
-//         <div key={index} >
-//           <td> <input
-//             type="text"
-//             className="form-control form-control-sm "
-//             id="descripcion"
-//             name="descripcion"
-//             value={item.descripcion}
-//             onChange={e => handleInputChange(e,index)}
-//             required={true}
-//             autoComplete="on"
-//           /></td>
-//           <td><input
-//             type="text"
-//             className="form-control form-control-sm "
-//             id="cetme"
-//             name="cetme"
-//             value={item.cetme}
-//             onChange={e => handleInputChange(e,index)}
-//             required={true}
-//             autoComplete="on"
-//           /></td>
-//           <td><input
-//             type="text"
-//             className="form-control form-control-sm "
-//             id="plano"
-//             name="plano"
-//             value={item.plano}
-//             onChange={e => handleInputChange(e,index)}
-//             required={true}
-//             autoComplete="on"
-//           /></td>
-//           <td><input
-//             type="text"
-//             className="form-control form-control-sm "
-//             id="cetme1"
-//             name="cetme1"
-//             value={item.cetme1}
-//             onChange={e => handleInputChange(e,index)}
-//             required={true}
-//             autoComplete="on"
-//           /></td>
-//           <td><input
-//             type="text"
-//             className="form-control form-control-sm "
-//             id="plano1"
-//             name="plano1"
-//             value={item.plano1}
-//             onChange={e => handleInputChange(e,index)}
-//             required={true}
-//             autoComplete="on"
-//           /></td> <td><input
-//             type="text"
-//             className="form-control form-control-sm "
-//             id="cetme2"
-//             name="cetme2"
-//             value={item.cetme2}
-//             onChange={e => handleInputChange(e,index)}
-//             required={true}
-//             autoComplete="on"
-//           /></td>
-//           <td><input
-//             type="text"
-//             className="form-control form-control-sm "
-//             id="plano2"
-//             name="plano2"
-//             value={item.plano2}
-//             onChange={e => handleInputChange(e,index)}
-//             required={true}
-//             autoComplete="on"
-//           /></td> <td><input
-//             type="text"
-//             className="form-control form-control-sm "
-//             id="cetme3"
-//             name="cetme3"
-//             value={item.cetme3}
-//             onChange={e => handleInputChange(e,index)}
-//             required={true}
-//             autoComplete="on"
-//           /></td>
-//           <td><input
-//             type="text"
-//             className="form-control form-control-sm "
-//             id="plano3"
-//             name="plano3"
-//             value={item.plano3}
-//             onChange={e => handleInputChange(e,index)}
-//             required={true}
-//             autoComplete="on"
-//           /></td>
-
-
-//           {inputs.length > 1 && (
-//             <button onClick={() => handleDeleteInput(index)}>Delete</button>
-//           )}
-//           {index === inputs.length - 1 && (
-//             <button onClick={() => handleAddInput()}>Add</button>
-//           )}
-
-//         </div>
-
-//       )
-//       )
-//       }
-
-//       <div className="body"> {JSON.stringify(inputs)} </div>
-//     </div>
-//   );
-// }

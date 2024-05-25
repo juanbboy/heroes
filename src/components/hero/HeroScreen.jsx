@@ -2,7 +2,7 @@ import { useParams, Navigate, useNavigate, Link } from 'react-router-dom'
 import { getBy_id } from '../../selectors/getBy_id';
 import React, { useEffect, useMemo, useState } from 'react'
 import AddDynamicInputFields from '../addfield/AddInputFields';
-import { Datamedida } from '../../data/heroes';
+
 
 const HeroScreen = () => {
 
@@ -18,7 +18,6 @@ const HeroScreen = () => {
     }, [])
 
     const data = async () => {
-        Datamedida()
         await getBy_id(id).then((res) => {
             sethero(res)
             console.log(res)
@@ -90,7 +89,7 @@ const HeroScreen = () => {
                         </thead>
                         <tbody>
                             <tr> */}
-                    <AddDynamicInputFields {...dpmedidas} />
+                    <AddDynamicInputFields {...hero} />
                     {/* </tr>
 
                         </tbody>
