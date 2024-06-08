@@ -50,19 +50,10 @@ const Formulario = () => {
         fecha_creacion: new Date(),
         estado: "",
         descripcion: "",
-        detalle: "",
-        cetme: "",
-        plano: "",
-        cetme1: "",
-        plano1: "",
-        cetme2: "",
-        plano2: "",
-        cetme3: "",
-        plano3: "",
-
+        talla: ""
     });
 
-    const { id, name, publisher, maquina, fecha_entrega, fecha_creacion, estado, descripcion } = formValues;
+    const { id, name, publisher, maquina, fecha_entrega, fecha_creacion, estado, descripcion, talla } = formValues;
 
     const cargar = (datos) => {
         formValues.id = datos.id
@@ -144,7 +135,7 @@ const Formulario = () => {
                                     <label className='col-sm-3' htmlFor="id"><b> Nombre: </b></label>
                                     <input
                                         type="text"
-                                        className="form-control form-control-sm "
+                                        className="form-control form-control-sm"
                                         id="id"
                                         name="id"
                                         value={id}
@@ -172,6 +163,18 @@ const Formulario = () => {
                                         id="publisher"
                                         name="publisher"
                                         value={publisher}
+                                        onChange={handleInputChange}
+                                        required={true}
+                                        autoComplete="on"
+                                    /> </li>
+                                <li className="list-group-item d-flex justify-content-between">
+                                    <label className='col-3' htmlFor="publisher"><b> Tallas: </b></label>
+                                    <input
+                                        type="text"
+                                        className="form-control form-control-sm "
+                                        id="talla"
+                                        name="talla"
+                                        value={talla}
                                         onChange={handleInputChange}
                                         required={true}
                                         autoComplete="on"

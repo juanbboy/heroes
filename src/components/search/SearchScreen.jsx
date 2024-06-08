@@ -10,6 +10,8 @@ const SearchScreen = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
+    const [searchestado, setsearchestado] = useState()
+    const [searchname, setsearchname] = useState()
     const [searchHeroes, setsearchHeroes] = useState()
 
     useEffect(() => {
@@ -25,12 +27,15 @@ const SearchScreen = () => {
     const { searchText } = formValues;
 
     const search = async (e) => {
-        await getHeroesByName(e).then((res) => {
-            setsearchHeroes(res)
-            console.log(res)
-        }) || getByEstado(e).then((res) => {
-            setsearchHeroes(res)
-            console.log(res)
+        await (getHeroesByName(e)).then((res) => {
+            console.log(res, "res1")
+            if (res == "") {
+                console.log("entra")
+                getByEstado(e).then((res) => {
+                    setsearchHeroes(res)
+                    console.log(res, "res2")
+                })
+            } else setsearchHeroes(res)
         })
     }
     // const searchHeroes = useMemo(() => getHeroesByName(q), [q]);
@@ -48,6 +53,8 @@ const SearchScreen = () => {
 
 
     if (!searchHeroes) return null
+
+
 
 
     return (

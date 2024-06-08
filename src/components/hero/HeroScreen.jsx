@@ -55,6 +55,7 @@ const HeroScreen = () => {
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item"> <b> Descripción: </b> {hero.name} </li>
                                 <li className="list-group-item"><b> Tipo: </b> {hero.publisher} </li>
+                                <li className="list-group-item"><b> talla: </b> {hero.talla} </li>
                                 <li className="list-group-item"> <b>Maquina: </b> {hero.maquina} </li>
                                 <li className="list-group-item"> <b> fecha de creacion: </b> {new Date(hero.fecha_creacion).toLocaleDateString()} </li>
                                 <li className="list-group-item"> <b> fecha de entrega: </b> {new Date(hero.fecha_entrega).toLocaleDateString()} </li>
