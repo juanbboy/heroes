@@ -10,8 +10,6 @@ const SearchScreen = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
-    const [searchestado, setsearchestado] = useState()
-    const [searchname, setsearchname] = useState()
     const [searchHeroes, setsearchHeroes] = useState()
 
     useEffect(() => {
@@ -62,7 +60,7 @@ const SearchScreen = () => {
             <h1>Search Screen</h1>
             <hr />
             <div className="row">
-                <div className="col-5">
+                <div className="col-sm-5">
                     <h3>
                         Búsqueda de DP's
                     </h3>
@@ -87,7 +85,7 @@ const SearchScreen = () => {
 
                     </form>
                 </div>
-                <div className="col-7">
+                <div className="col-sm-7">
                     <h3>
                         Resultados
                     </h3>
