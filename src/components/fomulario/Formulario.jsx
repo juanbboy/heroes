@@ -10,12 +10,13 @@ import 'react-calendar/dist/Calendar.css';
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
+import { useSelector } from 'react-redux';
 
 
 
 const Formulario = () => {
 
-
+    const { uid } = useSelector(state => state.auth)
     const navigate = useNavigate()
     const params = useParams()
     const [datos, setdatos] = useState(0)
@@ -64,6 +65,7 @@ const Formulario = () => {
         formValues.fecha_creacion = new Date(datos.fecha_creacion)
         formValues.estado = datos.estado
         formValues.descripcion = datos.descripcion
+        formValues.talla = datos.talla
         setdatos(datos)
     }
 
@@ -117,6 +119,7 @@ const Formulario = () => {
         navigate(-1)
     }
 
+    if (!uid === "nVWOi6EO3eNnNEKICTJGfg67bT83") return <h1 className='text-center'>!Acceso no autorizado¡</h1>
 
     return (
         <div>

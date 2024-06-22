@@ -16,7 +16,7 @@ const DashboardRouter = () => {
             <Navbar />
             <div className="mx-3 my-4">
                 <Routes>
-                    <Route path="/" element={<MarvelScreen />} />
+                    <Route path="/" element={<SearchScreen />} />
                     <Route path="/seamless" element={<DcScreen />} />
                     <Route path="/body" element={<MarvelScreen />} />
                     <Route path="/search" element={<SearchScreen />} />

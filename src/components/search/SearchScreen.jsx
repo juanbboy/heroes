@@ -59,7 +59,7 @@ const SearchScreen = () => {
         <div>
             <h1>Search Screen</h1>
             <hr />
-            <div className="row">
+            <div className="row ">
                 <div className="col-sm-5">
                     <h3>
                         Búsqueda de DP's
@@ -90,9 +90,11 @@ const SearchScreen = () => {
                         Resultados
                     </h3>
                     <hr />
-                    {
-                        searchHeroes.map(hero => <div className='p-1 col-8'><HeroCard key={hero.id} {...hero} /> </div>)
-                    }
+                    <div className='row'>
+                        {
+                            searchHeroes.map(hero => <div className='  p-1 col-sm-6'><HeroCard key={hero.id} {...hero} /> </div>)
+                        }
+                    </div>
                 </div>
             </div>
         </div>

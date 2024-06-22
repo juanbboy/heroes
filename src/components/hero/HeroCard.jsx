@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React from 'react'
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-const HeroCard = ({ _id, id, name, maquina, estado, fecha_entrega }) => {
-
+const HeroCard = ({ _id, id, name, maquina, estado, fecha_entrega, talla }) => {
+    const { uid } = useSelector(state => state.auth)
     const elimina = async (id) => {
         Swal.fire({
             title: 'Estás seguro?',
@@ -44,6 +45,7 @@ const HeroCard = ({ _id, id, name, maquina, estado, fecha_entrega }) => {
                         <ul className="list-group list-group-flush">
                             <li className="list-group-item"> {name} </li>
                             <li className="list-group-item"> {maquina} </li>
+                            <li className="list-group-item"> {talla} </li>
                             <li className="list-group-item"> {estado} </li>
                             <li className="list-group-item"> {new Date(fecha_entrega).toLocaleDateString()} </li>
                         </ul>
@@ -55,16 +57,21 @@ const HeroCard = ({ _id, id, name, maquina, estado, fecha_entrega }) => {
                                 Ver más ...
                             </Link>
                         </div>
-                        <div>
-                            <Link to={`/income/edit/${_id}`}>
-                                Editar
-                            </Link>
-                        </div>
-                        <div>
-                            <a type='button' className='link-primary' onClick={elimina.bind(this, _id)}>
-                                Eliminar
-                            </a>
-                        </div>
+                        {(uid === "nVWOi6EO3eNnNEKICTJGfg67bT83") ?
+                            <div>
+                                <Link to={`/income/edit/${_id}`}>
+                                    Editar
+                                </Link>
+                            </div>
+                            : ""}
+                        {(uid === "nVWOi6EO3eNnNEKICTJGfg67bT83") ?
+                            <div>
+                                <a type='button' className='link-primary' onClick={elimina.bind(this, _id)}>
+                                    Eliminar
+                                </a>
+
+                            </div>
+                            : ""}
                     </div>
                 </div>
             </div >

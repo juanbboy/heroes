@@ -66,7 +66,7 @@ const Calendario = () => {
 
     const eventStyleGetter = (myEventsList, start, end, isSelected) => {
         const style = {
-            backgroundColor: ("Entregado" === myEventsList.estado) ? '#90ee90' : '#367CF7',
+            backgroundColor: ("Entregado" === myEventsList.estado) ? '#90ee90' : ("Cancelado" === myEventsList.estado) ? '#E17B7B' : '#367CF7',
             borderRadius: '15px',
             opacity: 0.7,
             display: 'block',

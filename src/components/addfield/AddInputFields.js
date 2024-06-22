@@ -4,11 +4,13 @@ import { Table } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useSelector } from "react-redux";
 
-const AddInputFields = ({ crudo, tit_tabla, id }) => {
-
+const AddInputFields = ({ crudo, tit_tabla, id, date }) => {
+  const { uid } = useSelector(state => state.auth)
   const params = useParams()
 
+  const [date1, setdate1] = useState(date)
   const [talla, setTalla] = useState([
     {
       uno: '',
@@ -49,6 +51,9 @@ const AddInputFields = ({ crudo, tit_tabla, id }) => {
 
   }, [params.id])
 
+
+
+
   const InputChange = (e) => {
     const list = [...talla];
     list[0][e.target.name] = e.target.value;
@@ -63,11 +68,11 @@ const AddInputFields = ({ crudo, tit_tabla, id }) => {
   };
 
   const update = async (e) => {
+    const date = Date.now()
     e.preventDefault();
-    await axios.put(`https://desarrollonylon.vercel.app/api/update-desarrollo/${params.id}`, { tit_tabla: talla, crudo: formValues })
+    await axios.put(`https://desarrollonylon.vercel.app/api/update-desarrollo/${params.id}`, { tit_tabla: talla, crudo: formValues, date: date })
       .then(res => {
-        console.log(res);
-        console.log(res.data);
+        setdate1(date)
         Swal.fire({
           icon: 'success',
           title: 'Actualizado',
@@ -98,6 +103,7 @@ const AddInputFields = ({ crudo, tit_tabla, id }) => {
     data.splice(index, 1)
     setformValues(data)
   }
+  if (uid != "nVWOi6EO3eNnNEKICTJGfg67bT83") return null
 
   return (
     <div>
@@ -256,7 +262,7 @@ const AddInputFields = ({ crudo, tit_tabla, id }) => {
       </form>
       <button onClick={addFields}>Add More...</button>
       <button onClick={update}>Save</button>
-      {/* <button onClick={() => removeFields(index)}>Delete</button> */}
+      <p>Guardado: {new Date(date1).toLocaleString()}</p>
     </div>
   );
 }
