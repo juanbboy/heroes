@@ -6,6 +6,7 @@ export const messages = {
     month: 'Mes',
     week: 'Semana',
     day: 'Día',
+    year: "Año",
     agenda: 'Agenda',
     date: 'Fecha',
     time: 'Hora',

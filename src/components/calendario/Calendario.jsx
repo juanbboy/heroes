@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Calendar, momentLocalizer } from 'react-big-calendar'
+import { Calendar, momentLocalizer, BigCalendar } from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,10 +10,17 @@ import Modal from 'react-bootstrap/Modal';
 import { Button } from 'react-bootstrap';
 import HeroCard from '../hero/HeroCard';
 import HeroList from '../hero/HeroList';
+import Year from './Year';
 
-const localizer = momentLocalizer(moment)
-moment.locale('es');
+// import BigCalendar from 'react-big-calendar'
 
+
+// const localizer = momentLocalizer(moment)
+// moment.locale('es');
+
+
+const localizer = momentLocalizer(moment) // or globalizeLocalizer
+localizer.formats.yearHeaderFormat = 'YYYY'
 
 const Calendario = () => {
     const data = Data()
@@ -31,7 +38,6 @@ const Calendario = () => {
     }
 
     useEffect(() => {
-
         dataa()
     }, [])
 
@@ -71,10 +77,12 @@ const Calendario = () => {
             opacity: 0.7,
             display: 'block',
             color: 'white',
-            height: 21,
-            fontSize: 15,
+            // minHeight: 21,
+            fontSize: 14,
             // textAlign: "center"
-            padding: "0px 15px"
+            padding: "0px 15px",
+            margin: "0px"
+            // border: "1px solid #000"
         }
         return {
             style
@@ -90,8 +98,8 @@ const Calendario = () => {
                 localizer={localizer}
                 events={myEventsList}
                 titleAccessor="id"
-                startAccessor="fecha_entrega"
-                endAccessor={(myEventsList) => { return moment(myEventsList.fecha_entrega).add(1, 'h').format() }}
+                startAccessor={(myEventsList) => { return new Date(moment(myEventsList.fecha_entrega)) }}
+                endAccessor={(myEventsList) => { return new Date(moment(myEventsList.fecha_entrega).add(2, 'h')) }}
                 messages={messages}
                 style={{ height: 550 }}
                 selectable={true}
@@ -101,7 +109,14 @@ const Calendario = () => {
                 onView={onViewChange}
                 // onSelectSlot={onSelectSlot}
                 showAllEvents={true}
-                view={lastView}
+                // view={lastView}
+                views={{
+                    day: true,
+                    week: true,
+                    month: true,
+                    year: Year,
+                    agenda: true
+                }}
             />
 
             <div >

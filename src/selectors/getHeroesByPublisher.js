@@ -5,3 +5,6 @@ export const GetHeroesByPublisher = async publisher => {
     console.log(data)
     return await data.then((res) => res.filter(hero => hero.publisher === publisher))
 }
+
+
+
