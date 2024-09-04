@@ -1,25 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { Calendar, momentLocalizer, BigCalendar } from 'react-big-calendar'
+import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { messages } from '../../helpers/calendar-messages-es';
-import { uiOpenModal } from '../../actions/ui';
 import { Data } from "../../data/heroes";
 import Modal from 'react-bootstrap/Modal';
-import { Button } from 'react-bootstrap';
 import HeroCard from '../hero/HeroCard';
-import HeroList from '../hero/HeroList';
 import Year from './Year';
-
-// import BigCalendar from 'react-big-calendar'
-
+import './styles.css'
 
 // const localizer = momentLocalizer(moment)
 // moment.locale('es');
 
-
-const localizer = momentLocalizer(moment) // or globalizeLocalizer
+const localizer = momentLocalizer(moment)
 localizer.formats.yearHeaderFormat = 'YYYY'
 
 const Calendario = () => {
@@ -94,9 +88,9 @@ const Calendario = () => {
     return (
         <div>
             <Calendar
-
                 localizer={localizer}
                 events={myEventsList}
+                toolbar={true}
                 titleAccessor="id"
                 startAccessor={(myEventsList) => { return new Date(moment(myEventsList.fecha_entrega)) }}
                 endAccessor={(myEventsList) => { return new Date(moment(myEventsList.fecha_entrega).add(2, 'h')) }}
@@ -109,13 +103,12 @@ const Calendario = () => {
                 onView={onViewChange}
                 // onSelectSlot={onSelectSlot}
                 showAllEvents={true}
-                // view={lastView}
+                view={lastView}
                 views={{
-                    day: true,
+                    agenda: true,
                     week: true,
                     month: true,
-                    year: Year,
-                    agenda: true
+                    year: Year
                 }}
             />
 
