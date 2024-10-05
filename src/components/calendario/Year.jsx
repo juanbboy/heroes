@@ -101,8 +101,8 @@ class Calendar extends React.Component {
                                 key={date.date()}
                                 dateToRender={date}
                                 dateOfMonth={this.state.calendar.currentDate}
-                                onClick={date =>
-                                    alert(`Will go to daily-view of ${date.format('YYYY-MM-DD')}`)
+                                onClick={view =>
+                                    alert(`Will go to daily-view of ${view} `)
                                 }
                             />
                         ))}
@@ -129,11 +129,6 @@ class Year extends React.Component {
         return <div className="year">{months.map(month => month)}</div>
     }
 }
-
-// Day.propTypes = {
-//   date: PropTypes.instanceOf(Date).isRequired,
-// }
-
 
 
 Year.navigate = (date, action) => {

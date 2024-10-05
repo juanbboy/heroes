@@ -9,9 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 import HeroCard from '../hero/HeroCard';
 import Year from './Year';
 import './styles.css'
-
-// const localizer = momentLocalizer(moment)
-// moment.locale('es');
+import holidaysColombia from 'festivos-colombianos'
 
 const localizer = momentLocalizer(moment)
 localizer.formats.yearHeaderFormat = 'YYYY'
@@ -23,6 +21,9 @@ const Calendario = () => {
     const [myEventsList, setmyEventsList] = useState([])
     const [modal, setModal] = useState([])
     const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month');
+
+
+    const holidays = holidaysColombia(new Date().getFullYear())
 
 
     const dataa = async () => {
@@ -63,6 +64,29 @@ const Calendario = () => {
     //     dispatch(eventClearActiveEvent());
     // }
 
+    const dayPropGetter = (date) => {
+        let style = {}
+        const holidays = holidaysColombia(new Date().getFullYear())
+        let holiday = holidays.map(holiday => holiday.holiday)
+
+        if ((moment(date).day() === 0) || (holiday.indexOf(moment(date).format('YYYY-MM-DD')) > -1)) {
+            style = {
+                backgroundColor: '#fcf0f0',
+                // color: 'white',
+            }
+        }
+
+        if (moment(date).day() === 0) {
+            style = {
+                backgroundColor: '#fcf0f0',
+                // color: 'white',
+            }
+        }
+
+        return {
+            style
+        }
+    }
 
     const eventStyleGetter = (myEventsList, start, end, isSelected) => {
         const style = {
@@ -98,6 +122,7 @@ const Calendario = () => {
                 style={{ height: 550 }}
                 selectable={true}
                 eventPropGetter={eventStyleGetter}
+                dayPropGetter={dayPropGetter}
                 // onDoubleClickEvent={() => setModalShow(true)}
                 onSelectEvent={onSelectEvent}
                 onView={onViewChange}
@@ -108,7 +133,7 @@ const Calendario = () => {
                     agenda: true,
                     week: true,
                     month: true,
-                    year: Year
+                    year: Year,
                 }}
             />
 

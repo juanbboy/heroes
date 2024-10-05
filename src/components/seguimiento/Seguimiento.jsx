@@ -107,7 +107,9 @@ const Seguimiento = () => {
                 <div className='col-6 border border-dark'>1. ESTRUCTURA</div>
                 <div className='col-6 border border-dark'>CAIDAS</div>
             </div>
-            <div className='row'>
+
+            <div className="row row-cols-13">
+
                 <div className='col border border-dark rejilla'>PARTE</div>
                 <div className='col-3 border border-dark rejilla-1'>HILOS</div>
                 <div className='col border border-dark rejilla-3'>TORSION</div>
@@ -122,7 +124,7 @@ const Seguimiento = () => {
                 <div className='col border border-dark rejilla-2'>7</div>
                 <div className='col border border-dark rejilla-2'>8</div>
             </div>
-            <div className='row'>
+            <div className="row row-cols-13">
                 <div className='col border border-dark'>PARTE</div>
                 <div className='col-3 border border-dark'>
                     <div className='row'>

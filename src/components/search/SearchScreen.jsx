@@ -36,7 +36,7 @@ const SearchScreen = () => {
             } else setsearchHeroes(res)
         })
     }
-    // const searchHeroes = useMemo(() => getHeroesByName(q), [q]);
+    // const memoHeroes = useMemo(() => search(e), [e]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
