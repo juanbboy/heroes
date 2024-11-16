@@ -3,7 +3,7 @@ import './seguimiento.css';
 import { useForm } from '../../hooks/useForm';
 const Seguimiento = () => {
 
-    const [formValues, handleInputChange, reset] = useForm({
+    const [formValues, handleInputChange] = useForm({
         zona1: "",
         zona2: "",
         zona3: "",
@@ -13,9 +13,8 @@ const Seguimiento = () => {
         zona7: "",
         zona8: "",
         zona9: "",
-        zona10: ""
     });
-    const { zona1, zona2, zona3, zona4, zona5, zona6, zona7, zona8, zona9, zona10 } = formValues;
+    const { zona1, zona2, zona3, zona4, zona5, zona6, zona7, zona8, zona9 } = formValues;
 
 
     return (

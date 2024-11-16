@@ -12,6 +12,7 @@ import Seguimiento from '../components/seguimiento/Seguimiento'
 
 
 const DashboardRouter = () => {
+
     return (
         <>
             <Navbar />

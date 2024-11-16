@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React from 'react'
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -66,9 +65,9 @@ const HeroCard = ({ _id, id, name, maquina, estado, fecha_entrega, talla }) => {
                             : ""}
                         {(uid === "nVWOi6EO3eNnNEKICTJGfg67bT83") ?
                             <div>
-                                <a type='button' className='link-primary' onClick={elimina.bind(this, _id)}>
-                                    Eliminar
-                                </a>
+                                <div type='button' className='link-primary' onClick={elimina.bind(this, _id)}>
+                                    <ins>  Eliminar </ins>
+                                </div>
 
                             </div>
                             : ""}

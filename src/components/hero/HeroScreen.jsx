@@ -1,4 +1,4 @@
-import { useParams, Navigate, useNavigate, Link } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { getBy_id } from '../../selectors/getBy_id';
 import React, { useEffect, useMemo, useState } from 'react'
 import AddDynamicInputFields from '../addfield/AddInputFields';
@@ -9,22 +9,20 @@ const HeroScreen = () => {
     const { id } = useParams();
     const navigate = useNavigate()
     const [hero, sethero] = useState()
-    const [dpmedidas, setDpmedidas] = useState()
+    const [conexion, setConexion] = useState({})
 
-    // let { id, name, , fecha_creacion, fecha_entrega, descripcion } = hero;
 
-    useEffect(() => {
-        data()
-    }, [])
-
-    const data = async () => {
+    const conex = useMemo(async () => {
         await getBy_id(id).then((res) => {
             sethero(res)
-            console.log(res)
+            console.log("1")
         })
-        // await Datamedida().then((res) => setDpmedidas(res.find(res => res.id === id)))
+    }, [id])
 
-    }
+    useEffect(() => {
+        setConexion(conex)
+    }, [conexion, conex])
+
 
     if (!hero) return null
 
@@ -40,8 +38,6 @@ const HeroScreen = () => {
                 <div key={hero.id} className="col-sm-4 ">
                     <div className="card h-100">
                         <div className="col-7 align-self-center d-flex justify-content-center">
-                            {/* <img src={`/assets/${hero.id}.jpg`} style={{ maxHeight: '180px', objectFit: 'scale-down' }} className="card-img-top m-1" alt={`${hero.id}1`} /> */}
-                            {/* <img src={`/assets/${hero.id}1.jpg`} style={{ maxHeight: '180px', objectFit: 'scale-down' }} className="card-img-top m-1" alt={`${hero.id}1`} /> */}
                             <Link to={`/img/${hero.id}`} className='align-self-center d-flex justify-content-center' >
                                 <img loading="lazy" src={`/assets/${hero.id}.jpg`} style={{ height: '210px', width: "120px" }} className="card-img-top m-1" alt={hero.id} />
                             </Link>
@@ -59,6 +55,7 @@ const HeroScreen = () => {
                                 <li className="list-group-item"> <b>Maquina: </b> {hero.maquina} </li>
                                 <li className="list-group-item"> <b> fecha de creacion: </b> {new Date(hero.fecha_creacion).toLocaleDateString()} </li>
                                 <li className="list-group-item"> <b> fecha de entrega: </b> {new Date(hero.fecha_entrega).toLocaleDateString()} </li>
+                                <li className="list-group-item"> <b>Teñido: </b> <a href="http://intranet.dugotex.com/download_formato" target='blank'>4052014</a></li>
                                 <li className="list-group-item px-3" style={{ whiteSpace: "pre-wrap" }}><b>Observacion:</b><br />{hero.descripcion} </li>
                             </ul>
 
@@ -74,31 +71,10 @@ const HeroScreen = () => {
                     </div>
                 </div>
                 <div className='col-sm-8'>
-                    {/* <Table striped hover size="sm" responsive="sm">
-                        <thead >
-                            <tr>
-                                <th>Descripcion</th>
-                                <th>Cetme</th>
-                                <th>plano</th>
-                                <th>Cetme</th>
-                                <th>plano</th>
-                                <th>Cetme</th>
-                                <th>plano</th>
-                                <th>Cetme</th>
-                                <th>plano</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr> */}
                     <AddDynamicInputFields {...hero} />
-                    {/* </tr>
-
-                        </tbody>
-                    </Table> */}
-
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

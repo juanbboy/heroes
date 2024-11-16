@@ -9,18 +9,19 @@ import HeroCard from './HeroCard';
 const HeroList = ({ publisher }) => {
 
     const [heroes, setData] = useState(0)
+    const [conexion, setConexion] = useState({})
 
-    useEffect(() => {
-        data()
-    }, [])
-
-
-
-    const data = async () => {
+    const conex = useMemo(async () => {
         await GetHeroesByPublisher(publisher).then((res) => {
             setData(res)
         })
-    }
+    }, [publisher])
+
+    useEffect(() => {
+        setConexion(conex)
+    }, [conex, conexion])
+
+
     // const heroes = useMemo(() => publisher, [publisher]);
 
     if (!heroes) return null

@@ -11,7 +11,7 @@ export const useForm = (initialState = {}) => {
 
 
     const handleInputChange = ({ target }) => {
-
+        console.log(target)
         if (target.type === 'checkbox') {
 
             setValues({

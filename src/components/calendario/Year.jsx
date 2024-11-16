@@ -1,4 +1,3 @@
-// import PropTypes from 'prop-types'
 import React from 'react'
 import moment from 'moment'
 import { add, startOf } from 'react-big-calendar/lib/utils/dates'
@@ -62,7 +61,9 @@ function CalendarDate(props) {
             {dateToRender.date()}
         </button>
     )
+
 }
+
 
 class Calendar extends React.Component {
     state = {
@@ -115,8 +116,9 @@ class Calendar extends React.Component {
 
 class Year extends React.Component {
     render() {
-        let { date, ...props } = this.props
-        let range = Year.range(date)
+        let { date } = this.props
+        // let { date, ...props } = this.props
+        // let range = Year.range(date)
         const months = []
         const firstMonth = startOf(date, 'year')
 

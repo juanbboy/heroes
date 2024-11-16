@@ -5,7 +5,6 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
@@ -20,33 +19,12 @@ const Formulario = () => {
     const navigate = useNavigate()
     const params = useParams()
     const [datos, setdatos] = useState(0)
-
-
-    useEffect(() => {
-        console.log(params.id)
-        if (params.id != null) {
-            axios.get('https://desarrollonylon.vercel.app/api').then((res) => {
-                // axios.get('http://localhost:4002/api').then((res) => {
-                console.log("entra")
-                console.log(res.data.find((datos) => datos._id === params.id))
-                cargar(res.data.find((datos) => datos._id === params.id))
-
-            })
-        }
-    }, [params.id])
-
-
-    // const calendar = () => {
-    //   return  <Calendar onChange={onChange} value={value} />
-    // }
-
-
     const [formValues, handleInputChange, reset] = useForm({
         name: "",
         id: "",
-        name: "",
         publisher: "",
         maquina: "",
+        optenido: "",
         fecha_entrega: new Date(),
         fecha_creacion: new Date(),
         estado: "",
@@ -54,19 +32,37 @@ const Formulario = () => {
         talla: ""
     });
 
-    const { id, name, publisher, maquina, fecha_entrega, fecha_creacion, estado, descripcion, talla } = formValues;
+    const { id, name, publisher, maquina, optenido, fecha_entrega, fecha_creacion, estado, descripcion, talla } = formValues;
+
+
+    useEffect(() => {
+
+        if (params.id != null) {
+            axios.get('https://desarrollonylon.vercel.app/api').then((res) => {
+                // axios.get('http://localhost:4002/api').then((res) => {
+                console.log("entra")
+                console.log(res.data.find((datos) => datos._id === params.id))
+                cargar(res.data.find((datos) => datos._id === params.id))
+            })
+        }
+        console.log(params.id)
+
+    }, [params.id])
 
     const cargar = (datos) => {
         formValues.id = datos.id
         formValues.name = datos.name
         formValues.publisher = datos.publisher
         formValues.maquina = datos.maquina
+        formValues.optenido = datos.optenido
         formValues.fecha_entrega = new Date(datos.fecha_entrega)
         formValues.fecha_creacion = new Date(datos.fecha_creacion)
         formValues.estado = datos.estado
         formValues.descripcion = datos.descripcion
         formValues.talla = datos.talla
-        setdatos(datos)
+        setdatos({
+            ...formValues
+        })
     }
 
     const inputstar = (e) => {
@@ -100,9 +96,6 @@ const Formulario = () => {
         e.preventDefault();
         console.log(formValues)
         axios.post(`https://desarrollonylon.vercel.app/api/regdesarrollo`, formValues)
-            // axios.post(`http://localhost:4002/api/regdesarrollo`, formValues)
-            // axios.post(`http:///regdesarrollo`, formValues)
-            // axios.post(`https://bakend.vercel.app/api/regneedle`, formValues)
             .then(res => {
                 Swal.fire({
                     icon: 'success',
@@ -111,7 +104,6 @@ const Formulario = () => {
                     timer: 1200
                 })
                 reset();
-                // navigate("/needlelist")
             })
     }
 
@@ -194,6 +186,18 @@ const Formulario = () => {
                                         required={true}
                                         autoComplete="on"
                                     /> </li>
+                                <li className="list-group-item d-flex justify-content-between">
+                                    <label className='col-3' htmlFor="maquina"><b> Op Teñido: </b></label>
+                                    <input
+                                        type="text"
+                                        className="form-control form-control-sm "
+                                        id="optenido"
+                                        name="optenido"
+                                        value={optenido}
+                                        onChange={handleInputChange}
+                                        required={true}
+                                        autoComplete="on"
+                                    /> </li>
                                 <li className="list-group-item d-flex ">
                                     <label className='col-3' htmlFor="fecha_creacion"><b> fecha: </b></label>
                                     <DatePicker
@@ -216,18 +220,7 @@ const Formulario = () => {
                                         name="fecha_entrega"
                                         required={true}
                                         minDate={fecha_creacion}
-
                                     />
-                                    {/* <input
-                                        type="text"
-                                        className="form-control form-control-sm "
-                                        id="fecha_entrega"
-                                        name="fecha_entrega"
-                                        value={fecha_entrega}
-                                        onChange={handleInputChange}
-                                        required={true}
-                                        autoComplete="on"
-                                    /> */}
                                 </li>
                                 <li className="list-group-item d-flex justify-content-between">
                                     <label className='col-3' htmlFor="estado"><b> Estado: </b></label>
@@ -255,10 +248,7 @@ const Formulario = () => {
                                         autoComplete="on"
                                     /> </li>
                             </ul>
-
                         </div>
-
-
                     </div>
                 </form >
                 <div className="card-footer text-center">

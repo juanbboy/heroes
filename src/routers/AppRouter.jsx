@@ -6,12 +6,15 @@ import LoginScreen from '../components/login/LoginScreen';
 import DashboardRouter from './DashboardRouter';
 import PrivateRouter from './PrivateRouter';
 import PublicRouter from './PublicRouter';
-import RegisterScreen from '../components/login/RegisterScreen';
+// import RegisterScreen from '../components/login/RegisterScreen';
 import { firebase } from '../firebase/firebase-config'
 import { useDispatch } from 'react-redux';
 import { login } from '../actions/auth';
 
-
+// import { setupNotifications } from '../firebase/firebase-config';
+// import { toastNotification, sendNativeNotification } from '../firebase/notificationHelpers';
+// import useVisibilityChange from '../firebase/useVisibilityChange';
+// import { register } from '../firebase/serviceWorker';
 
 
 const AppRouter = () => {
@@ -24,6 +27,7 @@ const AppRouter = () => {
     const lastPath = localStorage.getItem('lastPath') || '/';
 
     useEffect(() => {
+        // preguntarPermisos()
         firebase.auth().onAuthStateChanged((user) => {
             // console.log(user);
             if (user?.uid) {
@@ -44,6 +48,27 @@ const AppRouter = () => {
             </div>
         )
     }
+
+    // const isForeground = useVisibilityChange();
+    // useEffect(() => {
+    //     setupNotifications((message) => {
+    //         if (isForeground) {
+    //             // App is in the foreground, show toast notification
+    //             toastNotification({
+    //                 title,
+    //                 description: body,
+    //                 status: "info",
+    //             });
+    //         } else {
+    //             // App is in the background, show native notification
+    //             sendNativeNotification({
+    //                 title,
+    //                 body,
+    //             });
+    //         }
+    //     });
+    // }, []);
+
 
     return (
         <BrowserRouter>

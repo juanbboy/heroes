@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useForm } from "../../hooks/useForm";
 import { Table } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -38,7 +37,7 @@ const AddInputFields = ({ crudo, tit_tabla, id, date }) => {
     if (crudo) {
       setformValues(crudo)
     }
-    if (tit_tabla != "") {
+    if (tit_tabla !== "") {
       setTalla(tit_tabla)
     } else {
       setTalla([{
@@ -49,7 +48,7 @@ const AddInputFields = ({ crudo, tit_tabla, id, date }) => {
       }])
     }
 
-  }, [params.id])
+  }, [params.id, crudo, tit_tabla])
 
 
 
@@ -103,14 +102,14 @@ const AddInputFields = ({ crudo, tit_tabla, id, date }) => {
     data.splice(index, 1)
     setformValues(data)
   }
-  if (uid != "nVWOi6EO3eNnNEKICTJGfg67bT83") return null
+  if (uid !== "nVWOi6EO3eNnNEKICTJGfg67bT83") return null
 
   return (
-    <div>
+    <div >
       <form onSubmit={update}>
-        <Table className="table" size="sm" responsive="sm">
+        <Table className="table" size="sm" responsive="sm"  >
           {talla.map((talla) => (
-            <thead className="text-center" >
+            <thead className="text-center" key={1} >
               <tr>
                 <th></th>
                 <th colSpan="2" >
@@ -249,12 +248,11 @@ const AddInputFields = ({ crudo, tit_tabla, id, date }) => {
                     style={{ border: "0" }}
                   />
                 </td>
-                <svg className='icon bi bi-trash3' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" onClick={() => removeFields(index)}>
-
-                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
-                </svg>
-                {/* <button onClick={() => removeFields(index)}>Remove</button> */}
-
+                <td>
+                  <svg className='icon bi bi-trash3' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" onClick={() => removeFields(index)}>
+                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                  </svg>
+                </td>
               </tr>
             ))}
           </tbody>

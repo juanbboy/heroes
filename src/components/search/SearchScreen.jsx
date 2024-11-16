@@ -1,15 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
 import { useForm } from '../../hooks/useForm';
-import queryString from 'query-string'
 import { getHeroesByName } from '../../selectors/getHeroesByName';
 import HeroCard from '../hero/HeroCard';
 import { getByEstado } from '../../selectors/getByEstado';
 
 const SearchScreen = () => {
 
-    const location = useLocation();
-    const navigate = useNavigate();
     const [searchHeroes, setsearchHeroes] = useState()
 
     useEffect(() => {
@@ -27,7 +23,7 @@ const SearchScreen = () => {
     const search = async (e) => {
         await (getHeroesByName(e)).then((res) => {
             console.log(res, "res1")
-            if (res == "") {
+            if (res !== "") {
                 console.log("entra")
                 getByEstado(e).then((res) => {
                     setsearchHeroes(res)

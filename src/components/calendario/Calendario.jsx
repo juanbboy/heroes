@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { useSelector } from 'react-redux';
 import { messages } from '../../helpers/calendar-messages-es';
 import { Data } from "../../data/heroes";
 import Modal from 'react-bootstrap/Modal';
@@ -10,6 +9,7 @@ import HeroCard from '../hero/HeroCard';
 import Year from './Year';
 import './styles.css'
 import holidaysColombia from 'festivos-colombianos'
+import 'moment/locale/es'
 
 const localizer = momentLocalizer(moment)
 localizer.formats.yearHeaderFormat = 'YYYY'
@@ -23,23 +23,20 @@ const Calendario = () => {
     const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month');
 
 
-    const holidays = holidaysColombia(new Date().getFullYear())
 
-
-    const dataa = async () => {
-        await data.then((res) => {
-            setmyEventsList(res)
-        })
-    }
 
     useEffect(() => {
-        dataa()
-    }, [])
-
+        const conex = async () => {
+            await data.then((res) => {
+                setmyEventsList(res)
+            })
+        }
+        conex()
+    }, [data])
 
 
     // const dispatch = useDispatch();
-    const { uid } = useSelector(state => state.auth);
+    // const { uid } = useSelector(state => state.auth);
 
     // const onDoubleClick = (e) => {
     //     // console.log(e);
@@ -70,13 +67,6 @@ const Calendario = () => {
         let holiday = holidays.map(holiday => holiday.holiday)
 
         if ((moment(date).day() === 0) || (holiday.indexOf(moment(date).format('YYYY-MM-DD')) > -1)) {
-            style = {
-                backgroundColor: '#fcf0f0',
-                // color: 'white',
-            }
-        }
-
-        if (moment(date).day() === 0) {
             style = {
                 backgroundColor: '#fcf0f0',
                 // color: 'white',
@@ -134,6 +124,7 @@ const Calendario = () => {
                     week: true,
                     month: true,
                     year: Year,
+                    // day: true
                 }}
             />
 
