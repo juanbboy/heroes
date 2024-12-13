@@ -4,6 +4,7 @@ import { getHeroesByName } from '../../selectors/getHeroesByName';
 import HeroCard from '../hero/HeroCard';
 import { getByEstado } from '../../selectors/getByEstado';
 
+
 const SearchScreen = () => {
 
     const [searchHeroes, setsearchHeroes] = useState()
@@ -36,20 +37,14 @@ const SearchScreen = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // navigate(`?q=${searchText}`)
     }
 
     const handleChange = (e) => {
         handleInputChange(e)
-        // navigate(`?q=${searchText}`)
         search(e.target.value)
     }
 
-
     if (!searchHeroes) return null
-
-
-
 
     return (
         <div>

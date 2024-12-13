@@ -9,6 +9,7 @@ import Formulario from '../components/fomulario/Formulario'
 import Imagen from '../components/imagen/Imagen'
 import Calendario from '../components/calendario/Calendario'
 import Seguimiento from '../components/seguimiento/Seguimiento'
+import UploadFile from '../components/pruebas/Pruebas'
 
 
 const DashboardRouter = () => {
@@ -25,6 +26,7 @@ const DashboardRouter = () => {
                     <Route path="/income" element={< Formulario />} />
                     <Route path="/agend" element={< Calendario />} />
                     <Route path="/seguimiento" element={< Seguimiento />} />
+                    <Route path="/Pruebas" element={< UploadFile />} />
 
                     <Route path="/dp/:id" element={<HeroScreen />} />
                     <Route path="/img/:id" element={<Imagen />} />

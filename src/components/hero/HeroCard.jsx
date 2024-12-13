@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-const HeroCard = ({ _id, id, name, maquina, estado, fecha_entrega, talla }) => {
+const HeroCard = ({ _id, id, name, maquina, estado, fecha_entrega, talla, img1, img2 }) => {
     const { uid } = useSelector(state => state.auth)
+    const CLOUD_NAME = "dr64wmtkm"
     const elimina = async (id) => {
         Swal.fire({
             title: 'Estás seguro?',
@@ -31,11 +32,11 @@ const HeroCard = ({ _id, id, name, maquina, estado, fecha_entrega, talla }) => {
             <div key={id} className=" animate__animated animate__fadeIn">
                 <div className="card w-100" >
                     <div className="col-8 align-self-center d-flex justify-content-center">
-                        <Link to={`/img/${id}`} className='align-self-center d-flex justify-content-center' >
-                            <img loading="lazy" src={`/assets/${id}.jpg`} style={{ height: '150px', width: "100px" }} className="card-img-top m-1" alt={id} />
+                        <Link to={`/img/${img1}`} className='align-self-center d-flex justify-content-center'>
+                            <img loading="lazy" src={`https://res.cloudinary.com/${CLOUD_NAME}/${img1}`} style={{ height: '150px', width: "100px" }} className="card-img-top m-1" alt={id} />
                         </Link>
-                        <Link to={`/img/${id}1`} className='align-self-center d-flex justify-content-center' >
-                            <img loading="lazy" src={`/assets/${id}1.jpg`} style={{ height: '150px', width: "100px" }} className="card-img-top m-1" alt={`${id}1`} />
+                        <Link to={`/img/${img2}`} className='align-self-center d-flex justify-content-center' >
+                            <img loading="lazy" src={`https://res.cloudinary.com/${CLOUD_NAME}/${img2}`} style={{ height: '150px', width: "100px" }} className="card-img-top m-1" alt={`${id}1`} />
                         </Link>
                     </div>
                     <div className="card-body">

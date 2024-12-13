@@ -19,6 +19,8 @@ const Formulario = () => {
     const navigate = useNavigate()
     const params = useParams()
     const [datos, setdatos] = useState(0)
+    const [file, setFile] = useState([])
+
     const [formValues, handleInputChange, reset] = useForm({
         name: "",
         id: "",
@@ -29,11 +31,15 @@ const Formulario = () => {
         fecha_creacion: new Date(),
         estado: "",
         descripcion: "",
-        talla: ""
+        talla: "",
+        img1: "",
+        img2: ""
     });
 
     const { id, name, publisher, maquina, optenido, fecha_entrega, fecha_creacion, estado, descripcion, talla } = formValues;
 
+    const CLOUD_NAME = "dr64wmtkm"
+    const UPLOAD_PRESET = "ml_default"
 
     useEffect(() => {
 
@@ -60,6 +66,8 @@ const Formulario = () => {
         formValues.estado = datos.estado
         formValues.descripcion = datos.descripcion
         formValues.talla = datos.talla
+        formValues.img1 = datos.img1
+        formValues.img2 = datos.img2
         setdatos({
             ...formValues
         })
@@ -79,7 +87,6 @@ const Formulario = () => {
         e.preventDefault();
         await axios.put(`https://desarrollonylon.vercel.app/api/update-desarrollo/${params.id}`, formValues)
             .then(res => {
-                console.log(res);
                 console.log(res.data);
                 Swal.fire({
                     icon: 'success',
@@ -91,24 +98,75 @@ const Formulario = () => {
             })
     }
 
-
-    const handleRegister = (e) => {
-        e.preventDefault();
-        console.log(formValues)
-        axios.post(`https://desarrollonylon.vercel.app/api/regdesarrollo`, formValues)
-            .then(res => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'correcto',
-                    showConfirmButton: false,
-                    timer: 1200
-                })
-                reset();
+    const hadleUpload = async () => {
+        const formData = new FormData();
+        file.forEach(async (file) => {
+            formData.append('file', file);
+            formData.append("upload_preset", UPLOAD_PRESET)
+            try {
+                await axios.post(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        },
+                    }).then((res) => {
+                        console.log(res)
+                        if (!formValues.img1) {
+                            console.log("img1")
+                            formValues.img1 = res.data.public_id
+                            console.log(formValues.img1)
+                        } else {
+                            console.log("img2")
+                            formValues.img2 = res.data.public_id
+                        }
+                    }
+                    )
+            } catch (error) {
+                console.error('Error uploading images:', error);
+                // Handle error
+            }
+            Swal.fire({
+                icon: 'success',
+                title: 'correcto',
+                showConfirmButton: false,
+                timer: 1200
             })
+        })
+    }
+
+    const handleRegister = async (e) => {
+        e.preventDefault();
+        setFile([])
+        if (formValues.img2) {
+            console.log(formValues, "dentro")
+            axios.post(`https://desarrollonylon.vercel.app/api/regdesarrollo`, formValues)
+                // axios.post(` http://localhost:4002/api/regdesarrollo`, formValues)
+                // http://localhost:3000/
+                .then(res => {
+                    console.log(formValues, "echothen")
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'correcto',
+                        showConfirmButton: false,
+                        timer: 1200
+                    })
+                    reset();
+                    console.log(formValues, "echo")
+                })
+        } else {
+            console.log("no entra")
+        }
+
     }
 
     const handleReturn = () => {
         navigate(-1)
+    }
+
+    const handleFileChange = (e, index) => {
+        let newArr = [...file]
+        newArr[index] = (e.target.files[0])
+        setFile(newArr)
     }
 
     if (!uid === "nVWOi6EO3eNnNEKICTJGfg67bT83") return <h1 className='text-center'>!Acceso no autorizado¡</h1>
@@ -116,15 +174,23 @@ const Formulario = () => {
     return (
         <div>
             <div className="col-sm-7 mx-auto">
-                <form onSubmit={handleRegister}>
+                <form >
                     <div className="card h-100">
-                        <div className="col-3 align-self-center">
-                            <img src={`/assets/photo.jpg`} className="card-img-top m-1" alt={"id"} />
+                        <div className="row justify-content-evenly">
+                            <div className="col-3 align-items-center ">
+                                {file[0] ? <img alt="Preview" id='img1' className="card-img-top m-1" height="70%" src={URL.createObjectURL(file[0])} /> : <img src={`/assets/photo.jpg`} className="card-img-top m-1" alt={"id"} />}
+                                <input name="img1" id='img1' type="file" className='form-control form-control-sm' onChange={(e) => handleFileChange(e, 0)}></input>
+                            </div>
+                            <div className="col-3 justify-content-md-center">
+                                {file[1] ? <img alt="Preview" id='img2' className="card-img-top m-1" height="70%" src={URL.createObjectURL(file[1])} /> : <img src={`/assets/photo.jpg`} className="card-img-top m-1" alt={"id"} />}
+                                <input name="img2" id='img2' type="file" className='form-control form-control-sm' onChange={(e) => handleFileChange(e, 1)}></input>
+                            </div>
+                            <div className='text-center p-1 my-2'>
+                                <button className='btn btn-primary btn-sm' onClick={hadleUpload}>upload imagen</button>
+                            </div>
                         </div>
 
                         <div className="card-body">
-                            {/* <h3 className="card-title">{id}</h3> */}
-
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item d-flex justify-content-between">
                                     <label className='col-sm-3' htmlFor="id"><b> Nombre: </b></label>

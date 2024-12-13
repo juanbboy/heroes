@@ -11,6 +11,7 @@ const HeroScreen = () => {
     const [hero, sethero] = useState()
     const [conexion, setConexion] = useState({})
 
+    const CLOUD_NAME = "dr64wmtkm"
 
     const conex = useMemo(async () => {
         await getBy_id(id).then((res) => {
@@ -38,11 +39,11 @@ const HeroScreen = () => {
                 <div key={hero.id} className="col-sm-4 ">
                     <div className="card h-100">
                         <div className="col-7 align-self-center d-flex justify-content-center">
-                            <Link to={`/img/${hero.id}`} className='align-self-center d-flex justify-content-center' >
-                                <img loading="lazy" src={`/assets/${hero.id}.jpg`} style={{ height: '210px', width: "120px" }} className="card-img-top m-1" alt={hero.id} />
+                            <Link to={`/img/${hero.img1}`} className='align-self-center d-flex justify-content-center' >
+                                <img loading="lazy" src={`https://res.cloudinary.com/${CLOUD_NAME}/${hero.img1}`} style={{ height: '210px', width: "120px" }} className="card-img-top m-1" alt={hero.id} />
                             </Link>
-                            <Link to={`/img/${hero.id}1`} className='align-self-center d-flex justify-content-center' >
-                                <img loading="lazy" src={`/assets/${hero.id}1.jpg`} style={{ height: '210px', width: "120px" }} className="card-img-top m-1" alt={`${hero.id}1`} />
+                            <Link to={`/img/${hero.img2}1`} className='align-self-center d-flex justify-content-center' >
+                                <img loading="lazy" src={`https://res.cloudinary.com/${CLOUD_NAME}/${hero.img2}`} style={{ height: '210px', width: "120px" }} className="card-img-top m-1" alt={`${hero.id}1`} />
                             </Link>
                         </div>
                         <div className="card-body">
@@ -55,7 +56,7 @@ const HeroScreen = () => {
                                 <li className="list-group-item"> <b>Maquina: </b> {hero.maquina} </li>
                                 <li className="list-group-item"> <b> fecha de creacion: </b> {new Date(hero.fecha_creacion).toLocaleDateString()} </li>
                                 <li className="list-group-item"> <b> fecha de entrega: </b> {new Date(hero.fecha_entrega).toLocaleDateString()} </li>
-                                <li className="list-group-item"> <b>Teñido: </b> <a href="http://intranet.dugotex.com/download_formato" target='blank'>4052014</a></li>
+                                <li className="list-group-item"> <b>Teñido: </b> <a href="http://intranet.dugotex.com/download_formato" target='blank'>{hero.optenido} </a></li>
                                 <li className="list-group-item px-3" style={{ whiteSpace: "pre-wrap" }}><b>Observacion:</b><br />{hero.descripcion} </li>
                             </ul>
 

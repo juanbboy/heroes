@@ -2,7 +2,6 @@ import React from 'react'
 import GoogleButton from 'react-google-button'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import logo from '../../assets/3.png';
 import './LoginScreen.css';
 import { useForm } from '../../hooks/useForm'
 import { startLoginEmailPassword, startGoogleLogin } from '../../actions/auth'
@@ -10,7 +9,7 @@ import { removeError } from '../../actions/ui';
 
 const LoginScreen = () => {
 
-
+    const CLOUD_NAME = "dr64wmtkm"
     const dispatch = useDispatch();
     const { loading } = useSelector(state => state.ui)
     const { msgError } = useSelector(state => state.ui);
@@ -39,7 +38,7 @@ const LoginScreen = () => {
         <body className="text-center">
             <main className="form-signin">
                 <form onSubmit={handleLogin}>
-                    <img className="mb-4 rounded mx-auto d-block" src={logo} alt="" width="290" height="70" />
+                    <img className="mb-4 rounded mx-auto d-block" src={`https://res.cloudinary.com/${CLOUD_NAME}/3_d2jfm9`} alt="" width="290" height="70" />
                     <h1 className="h3 mb-3 fw-normal">Iniciar sesion</h1>
                     {
                         msgError && (

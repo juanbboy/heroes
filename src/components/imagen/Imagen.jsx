@@ -6,8 +6,8 @@ import { useParams } from 'react-router-dom';
 
 const Imagen = () => {
     const params = useParams()
+    const CLOUD_NAME = "dr64wmtkm"
     const navigate = useNavigate()
-    console.log(params.id)
 
     const handleReturn = () => {
         navigate(-1);
@@ -17,7 +17,7 @@ const Imagen = () => {
     return (
         <div>
 
-            <img onClick={handleReturn} src={`/assets/${params.id}.jpg`} className="card-img-top m-1  col animate__animated animate__fadeIn" alt={params.id} />
+            <img onClick={handleReturn} src={`https://res.cloudinary.com/${CLOUD_NAME}/${params.id}`} className="card-img-top m-1  col animate__animated animate__fadeIn" alt={params.id} />
 
         </div>
     )
