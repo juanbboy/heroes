@@ -68,9 +68,7 @@ const Formulario = () => {
         formValues.talla = datos.talla
         formValues.img1 = datos.img1
         formValues.img2 = datos.img2
-        setdatos({
-            ...formValues
-        })
+        setdatos(+1)
     }
 
     const inputstar = (e) => {
@@ -112,11 +110,9 @@ const Formulario = () => {
                     }).then((res) => {
                         console.log(res)
                         if (!formValues.img1) {
-                            console.log("img1")
                             formValues.img1 = res.data.public_id
                             console.log(formValues.img1)
                         } else {
-                            console.log("img2")
                             formValues.img2 = res.data.public_id
                         }
                     }
@@ -138,7 +134,6 @@ const Formulario = () => {
         e.preventDefault();
         setFile([])
         if (formValues.img2) {
-            console.log(formValues, "dentro")
             axios.post(`https://desarrollonylon.vercel.app/api/regdesarrollo`, formValues)
                 // axios.post(` http://localhost:4002/api/regdesarrollo`, formValues)
                 // http://localhost:3000/
@@ -151,7 +146,6 @@ const Formulario = () => {
                         timer: 1200
                     })
                     reset();
-                    console.log(formValues, "echo")
                 })
         } else {
             console.log("no entra")

@@ -94,7 +94,6 @@ const AddInputFields = ({ crudo, tit_tabla, id, date }) => {
       cetme3: '',
       plano3: "",
     }])
-
   }
 
   const removeFields = (index) => {

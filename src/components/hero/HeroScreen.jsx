@@ -16,14 +16,12 @@ const HeroScreen = () => {
     const conex = useMemo(async () => {
         await getBy_id(id).then((res) => {
             sethero(res)
-            console.log("1")
         })
     }, [id])
 
     useEffect(() => {
         setConexion(conex)
     }, [conexion, conex])
-
 
     if (!hero) return null
 
@@ -42,6 +40,7 @@ const HeroScreen = () => {
                             <Link to={`/img/${hero.img1}`} className='align-self-center d-flex justify-content-center' >
                                 <img loading="lazy" src={`https://res.cloudinary.com/${CLOUD_NAME}/${hero.img1}`} style={{ height: '210px', width: "120px" }} className="card-img-top m-1" alt={hero.id} />
                             </Link>
+
                             <Link to={`/img/${hero.img2}1`} className='align-self-center d-flex justify-content-center' >
                                 <img loading="lazy" src={`https://res.cloudinary.com/${CLOUD_NAME}/${hero.img2}`} style={{ height: '210px', width: "120px" }} className="card-img-top m-1" alt={`${hero.id}1`} />
                             </Link>
@@ -57,7 +56,19 @@ const HeroScreen = () => {
                                 <li className="list-group-item"> <b> fecha de creacion: </b> {new Date(hero.fecha_creacion).toLocaleDateString()} </li>
                                 <li className="list-group-item"> <b> fecha de entrega: </b> {new Date(hero.fecha_entrega).toLocaleDateString()} </li>
                                 <li className="list-group-item"> <b>Teñido: </b> <a href="http://intranet.dugotex.com/download_formato" target='blank'>{hero.optenido} </a></li>
+                                <li className='list-group-item'> <b>Seguimiento: </b>
+                                    {hero.seguimiento.length === 0 ? <Link to={`/sgm/${hero._id}`}>Nuevo</Link> : null}
+                                    {hero.seguimiento.map((sgm, index) => (
+                                        <li className='mx-4' key={index}>
+                                            <Link to={`/sgm/${hero._id}`} state={{ hero, index }}>{sgm.fecha}</Link>
+                                        </li>
+                                    ))}
+                                </li>
+
                                 <li className="list-group-item px-3" style={{ whiteSpace: "pre-wrap" }}><b>Observacion:</b><br />{hero.descripcion} </li>
+
+                                {/* // <Link to={`/sgm/${hero._id}`} state={{ ...hero }}> </Link> */}
+
                             </ul>
 
                         </div>

@@ -38,7 +38,7 @@ const LoginScreen = () => {
         <body className="text-center">
             <main className="form-signin">
                 <form onSubmit={handleLogin}>
-                    <img className="mb-4 rounded mx-auto d-block" src={`https://res.cloudinary.com/${CLOUD_NAME}/3_d2jfm9`} alt="" width="290" height="70" />
+                    <img className="mb-4 rounded mx-auto d-block" src={`https://res.cloudinary.com/${CLOUD_NAME}/3_d2jfm9`} alt="login" width="290" height="70" />
                     <h1 className="h3 mb-3 fw-normal">Iniciar sesion</h1>
                     {
                         msgError && (

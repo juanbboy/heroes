@@ -29,6 +29,7 @@ const DashboardRouter = () => {
                     <Route path="/Pruebas" element={< UploadFile />} />
 
                     <Route path="/dp/:id" element={<HeroScreen />} />
+                    <Route path="/sgm/:id" element={<Seguimiento />} />
                     <Route path="/img/:id" element={<Imagen />} />
                     <Route path="/income/edit/:id" element={<Formulario />} />
                 </Routes>
