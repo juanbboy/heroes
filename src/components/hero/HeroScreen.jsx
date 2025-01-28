@@ -58,11 +58,13 @@ const HeroScreen = () => {
                                 <li className="list-group-item"> <b>Teñido: </b> <a href="http://intranet.dugotex.com/download_formato" target='blank'>{hero.optenido} </a></li>
                                 <li className='list-group-item'> <b>Seguimiento: </b>
                                     {hero.seguimiento.length === 0 ? <Link to={`/sgm/${hero._id}`}>Nuevo</Link> : null}
-                                    {hero.seguimiento.map((sgm, index) => (
-                                        <li className='mx-4' key={index}>
-                                            <Link to={`/sgm/${hero._id}`} state={{ hero, index }}>{sgm.fecha}</Link>
-                                        </li>
-                                    ))}
+                                    <ul>
+                                        {hero.seguimiento.map((sgm, index) => (
+                                            <li key={index}>
+                                                <Link to={`/sgm/${hero._id}`} state={{ hero, index }}>{sgm.fecha}</Link>
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </li>
 
                                 <li className="list-group-item px-3" style={{ whiteSpace: "pre-wrap" }}><b>Observacion:</b><br />{hero.descripcion} </li>

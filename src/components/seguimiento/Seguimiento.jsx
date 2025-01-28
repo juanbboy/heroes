@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import './seguimiento.css';
 import { useForm } from '../../hooks/useForm';
 import { useLocation, useParams } from 'react-router-dom';
@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 const Seguimiento = () => {
     const location = useLocation();
     const params = useParams()
-    const state = location.state;
+
     const [formValues, handleInputChange, , setData] = useForm({
         fecha: new Date(Date.now()).toLocaleDateString(),
         producto: "",
@@ -143,6 +143,30 @@ const Seguimiento = () => {
         t7_10: "",
         t7_11: "",
         t7_12: "",
+        t12_1: "",
+        t12_2: "",
+        t12_3: "",
+        t12_4: "",
+        t12_5: "",
+        t12_6: "",
+        t12_7: "",
+        t12_8: "",
+        t12_9: "",
+        t12_10: "",
+        t12_11: "",
+        t12_12: "",
+        t13_1: "",
+        t13_2: "",
+        t13_3: "",
+        t13_4: "",
+        t13_5: "",
+        t13_6: "",
+        t13_7: "",
+        t13_8: "",
+        t13_9: "",
+        t13_10: "",
+        t13_11: "",
+        t13_12: "",
         t8_1: "",
         t8_2: "",
         t8_3: "",
@@ -300,9 +324,14 @@ const Seguimiento = () => {
         m9_11: "",
         m9_12: "",
         obs: "",
-
+        descl1: "",
+        descl2: "",
+        descl3: "",
+        descl4: "",
 
     });
+
+
     const {
         zona1,
         zona2,
@@ -527,6 +556,10 @@ const Seguimiento = () => {
         descrip7,
         descrip8,
         descrip9,
+        descl1,
+        descl2,
+        descl3,
+        descl4,
         m1_1,
         m1_2,
         m1_3,
@@ -748,15 +781,41 @@ const Seguimiento = () => {
         t11_4,
         t11_5,
         t11_6,
+        t12_1,
+        t12_2,
+        t12_3,
+        t12_4,
+        t12_5,
+        t12_6,
+        t12_7,
+        t12_8,
+        t12_9,
+        t12_10,
+        t12_11,
+        t12_12,
+        t13_1,
+        t13_2,
+        t13_3,
+        t13_4,
+        t13_5,
+        t13_6,
+        t13_7,
+        t13_8,
+        t13_9,
+        t13_10,
+        t13_11,
+        t13_12,
         obs,
     } = formValues;
 
-    useEffect(() => {
-        if (state != null) {
-            setData(state.hero.seguimiento[state.index])
-        }
-    }, [state])
 
+    const state = location.state || { hero: { seguimiento: [] } };
+
+    useEffect(() => {
+        if (state.hero && state.hero.seguimiento && state.hero.seguimiento.length > 0) {
+            setData(state.hero.seguimiento[state.index]);
+        }
+    }, [state]);
 
     const update = async (e) => {
         e.preventDefault();
@@ -792,10 +851,6 @@ const Seguimiento = () => {
             })
     }
 
-
-    console.log(state, "state")
-    console.log(formValues, "formValues")
-
     return (
         <div className='px-5'>
             <div className='row'>
@@ -812,7 +867,7 @@ const Seguimiento = () => {
                             <div className='col'>
                                 <input
                                     type="text"
-                                    className="form-control form-control-sm border-0 p-0 text-center  "
+                                    className="form-control form-control-sm border-0 p-0  "
                                     id="causa"
                                     name="causa"
                                     value={causa}
@@ -913,10 +968,6 @@ const Seguimiento = () => {
                         autoComplete="on"
                     />
                 </div>
-            </div>
-            <div className='row py-2'>
-                <div className='col-1'></div>
-                <div className='col-2 '></div>
                 <div className='col-3 '></div>
                 <div className='col-1 text-end'>REF</div>
                 <div className='col-2  border-dark border-bottom'>
@@ -1207,29 +1258,29 @@ const Seguimiento = () => {
                 </div>
             </div>
             <div className='row'>
-                <table className="table table-bordered border border-dark table-sm text-center m-0  ">
+                <table className="table table-bordered border border-dark table-sm text-center m-0 p-0 ">
                     <tbody>
                         <tr>
-                            <td className='text-start' colSpan="5">1. ESTRUCTURA</td>
-                            <td colSpan="8">CAIDAS</td>
+                            <td className='py-0 text-start' colSpan="5">1. ESTRUCTURA</td>
+                            <td className='py-0' colSpan="8">CAIDAS</td>
                         </tr>
                         <tr>
-                            <td className='' style={{ width: "10%" }} >ZONA</td>
-                            <td className='' style={{ width: "25%" }}>HILOS</td>
-                            <td className='' style={{ width: "5%" }}>TORSION</td>
-                            <td className='' style={{ width: "5%" }}>PROVEEDOR</td>
-                            <td className='' style={{ width: "5%" }} >LOTE</td>
-                            <td className='' >1</td>
-                            <td className='' >2</td>
-                            <td className='' >3</td>
-                            <td className='' >4</td>
-                            <td className='' >5</td>
-                            <td className='' >6</td>
-                            <td className='' >7</td>
-                            <td className='' >8</td>
+                            <td className='py-0 ' style={{ width: "10%" }} >ZONA</td>
+                            <td className='py-0 ' style={{ width: "25%" }}>HILOS</td>
+                            <td className='py-0 ' style={{ width: "5%" }}>TORSION</td>
+                            <td className='py-0 ' style={{ width: "5%" }}>PROVEEDOR</td>
+                            <td className='py-0 ' style={{ width: "5%" }} >LOTE</td>
+                            <td className='py-0 ' >1</td>
+                            <td className='py-0 ' >2</td>
+                            <td className='py-0 ' >3</td>
+                            <td className='py-0 ' >4</td>
+                            <td className='py-0 ' >5</td>
+                            <td className='py-0 ' >6</td>
+                            <td className='py-0 ' >7</td>
+                            <td className='py-0 ' >8</td>
                         </tr>
-                        <tr>
-                            <td rowSpan="3 ">
+                        <tr >
+                            <td className='py-0' rowSpan="3 ">
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1241,7 +1292,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1253,7 +1304,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1265,7 +1316,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1277,7 +1328,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td> <input
+                            <td className='py-0'> <input
                                 type="text"
                                 className="form-control form-control-sm border-0 p-0 text-center "
                                 id="lote1"
@@ -1288,7 +1339,7 @@ const Seguimiento = () => {
                                 autoComplete="on"
                             />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1300,7 +1351,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1312,7 +1363,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1324,7 +1375,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1336,7 +1387,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1348,7 +1399,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1360,7 +1411,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1372,7 +1423,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1386,7 +1437,7 @@ const Seguimiento = () => {
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1398,7 +1449,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1410,7 +1461,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1422,7 +1473,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td> <input
+                            <td className='py-0'> <input
                                 type="text"
                                 className="form-control form-control-sm border-0 p-0 text-center "
                                 id="lote2"
@@ -1433,7 +1484,7 @@ const Seguimiento = () => {
                                 autoComplete="on"
                             />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1445,7 +1496,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1457,7 +1508,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1469,7 +1520,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1481,7 +1532,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1493,7 +1544,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1505,7 +1556,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1517,7 +1568,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1531,7 +1582,7 @@ const Seguimiento = () => {
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1543,7 +1594,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1555,7 +1606,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1567,7 +1618,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td> <input
+                            <td className='py-0'> <input
                                 type="text"
                                 className="form-control form-control-sm border-0 p-0 text-center "
                                 id="lote3"
@@ -1578,7 +1629,7 @@ const Seguimiento = () => {
                                 autoComplete="on"
                             />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1590,7 +1641,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1602,7 +1653,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1614,7 +1665,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1626,7 +1677,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1638,7 +1689,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1650,7 +1701,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1662,7 +1713,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1688,7 +1739,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1700,7 +1751,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1712,7 +1763,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1724,7 +1775,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td> <input
+                            <td className='py-0'> <input
                                 type="text"
                                 className="form-control form-control-sm border-0 p-0 text-center "
                                 id="lote4"
@@ -1735,7 +1786,7 @@ const Seguimiento = () => {
                                 autoComplete="on"
                             />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1747,7 +1798,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1759,7 +1810,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1771,7 +1822,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1783,7 +1834,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1795,7 +1846,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1807,7 +1858,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1819,7 +1870,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1833,7 +1884,7 @@ const Seguimiento = () => {
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1845,7 +1896,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1857,7 +1908,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1869,7 +1920,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td> <input
+                            <td className='py-0'> <input
                                 type="text"
                                 className="form-control form-control-sm border-0 p-0 text-center "
                                 id="lote5"
@@ -1880,7 +1931,7 @@ const Seguimiento = () => {
                                 autoComplete="on"
                             />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1892,7 +1943,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1904,7 +1955,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1916,7 +1967,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1928,7 +1979,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1940,7 +1991,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1952,7 +2003,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1964,7 +2015,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1979,7 +2030,7 @@ const Seguimiento = () => {
                         </tr>
                         <tr>
 
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -1991,7 +2042,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2003,7 +2054,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2015,7 +2066,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td> <input
+                            <td className='py-0'> <input
                                 type="text"
                                 className="form-control form-control-sm border-0 p-0 text-center "
                                 id="lote6"
@@ -2026,7 +2077,7 @@ const Seguimiento = () => {
                                 autoComplete="on"
                             />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2038,7 +2089,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2050,7 +2101,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2062,7 +2113,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2074,7 +2125,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2086,7 +2137,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2098,7 +2149,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2110,7 +2161,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2136,7 +2187,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2148,7 +2199,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2160,7 +2211,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2172,7 +2223,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td> <input
+                            <td className='py-0'> <input
                                 type="text"
                                 className="form-control form-control-sm border-0 p-0 text-center "
                                 id="lote7"
@@ -2183,7 +2234,7 @@ const Seguimiento = () => {
                                 autoComplete="on"
                             />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2195,7 +2246,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2207,7 +2258,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2219,7 +2270,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2231,7 +2282,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2243,7 +2294,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2255,7 +2306,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2267,7 +2318,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2281,7 +2332,7 @@ const Seguimiento = () => {
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2293,7 +2344,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2305,7 +2356,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2317,7 +2368,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td> <input
+                            <td className='py-0'> <input
                                 type="text"
                                 className="form-control form-control-sm border-0 p-0 text-center "
                                 id="lote8"
@@ -2328,7 +2379,7 @@ const Seguimiento = () => {
                                 autoComplete="on"
                             />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2340,7 +2391,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2352,7 +2403,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2364,7 +2415,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2376,7 +2427,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2388,7 +2439,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2400,7 +2451,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2412,7 +2463,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2427,7 +2478,7 @@ const Seguimiento = () => {
                         </tr>
                         <tr>
 
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2439,7 +2490,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2451,7 +2502,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2463,7 +2514,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td> <input
+                            <td className='py-0'> <input
                                 type="text"
                                 className="form-control form-control-sm border-0 p-0 text-center "
                                 id="lote9"
@@ -2474,7 +2525,7 @@ const Seguimiento = () => {
                                 autoComplete="on"
                             />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2486,7 +2537,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2498,7 +2549,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2510,7 +2561,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2522,7 +2573,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2534,7 +2585,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2546,7 +2597,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2558,7 +2609,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2584,7 +2635,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2596,7 +2647,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2608,7 +2659,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2620,7 +2671,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td> <input
+                            <td className='py-0'> <input
                                 type="text"
                                 className="form-control form-control-sm border-0 p-0 text-center "
                                 id="lote10"
@@ -2631,7 +2682,7 @@ const Seguimiento = () => {
                                 autoComplete="on"
                             />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2643,7 +2694,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2655,7 +2706,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2667,7 +2718,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2679,7 +2730,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2691,7 +2742,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2703,7 +2754,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2715,7 +2766,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2729,7 +2780,7 @@ const Seguimiento = () => {
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2741,7 +2792,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2753,7 +2804,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2765,7 +2816,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td> <input
+                            <td className='py-0'> <input
                                 type="text"
                                 className="form-control form-control-sm border-0 p-0 text-center "
                                 id="lote11"
@@ -2776,7 +2827,7 @@ const Seguimiento = () => {
                                 autoComplete="on"
                             />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2788,7 +2839,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2800,7 +2851,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2812,7 +2863,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2824,7 +2875,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2836,7 +2887,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2848,7 +2899,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2860,7 +2911,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2875,7 +2926,7 @@ const Seguimiento = () => {
                         </tr>
                         <tr>
 
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2887,7 +2938,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2899,7 +2950,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2911,7 +2962,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td> <input
+                            <td className='py-0'> <input
                                 type="text"
                                 className="form-control form-control-sm border-0 p-0 text-center "
                                 id="lote12"
@@ -2922,7 +2973,7 @@ const Seguimiento = () => {
                                 autoComplete="on"
                             />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2934,7 +2985,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2946,7 +2997,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2958,7 +3009,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2970,7 +3021,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2982,7 +3033,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -2994,7 +3045,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3006,7 +3057,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3032,7 +3083,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3044,7 +3095,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3056,7 +3107,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3068,7 +3119,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td> <input
+                            <td className='py-0'> <input
                                 type="text"
                                 className="form-control form-control-sm border-0 p-0 text-center "
                                 id="lote13"
@@ -3079,7 +3130,7 @@ const Seguimiento = () => {
                                 autoComplete="on"
                             />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3091,7 +3142,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3103,7 +3154,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3115,7 +3166,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3127,7 +3178,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3139,7 +3190,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3151,7 +3202,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3163,7 +3214,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3177,7 +3228,7 @@ const Seguimiento = () => {
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3189,7 +3240,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3201,7 +3252,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3213,7 +3264,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td> <input
+                            <td className='py-0'> <input
                                 type="text"
                                 className="form-control form-control-sm border-0 p-0 text-center "
                                 id="lote14"
@@ -3224,7 +3275,7 @@ const Seguimiento = () => {
                                 autoComplete="on"
                             />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3236,7 +3287,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3248,7 +3299,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3260,7 +3311,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3272,7 +3323,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3284,7 +3335,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3296,7 +3347,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3308,7 +3359,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3322,7 +3373,7 @@ const Seguimiento = () => {
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3334,7 +3385,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3346,7 +3397,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3358,7 +3409,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td> <input
+                            <td className='py-0'> <input
                                 type="text"
                                 className="form-control form-control-sm border-0 p-0 text-center "
                                 id="lote15"
@@ -3369,7 +3420,7 @@ const Seguimiento = () => {
                                 autoComplete="on"
                             />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3381,7 +3432,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3393,7 +3444,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3405,7 +3456,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3417,7 +3468,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3429,7 +3480,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3441,7 +3492,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -3453,7 +3504,7 @@ const Seguimiento = () => {
                                     autoComplete="on"
                                 />
                             </td>
-                            <td>
+                            <td className='py-0'>
                                 <input
                                     type="text"
                                     className="form-control form-control-sm border-0 p-0 text-center "
@@ -5959,10 +6010,427 @@ const Seguimiento = () => {
                         </div>
                     </div>
                     <div className='row'>
+                        <div className='col-2 border border-dark '>{descrip7}</div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t7_1"
+                            name="t7_1"
+                            value={t7_1}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t7_2"
+                            name="t7_2"
+                            value={t7_2}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t7_3"
+                            name="t7_3"
+                            value={t7_3}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t7_4"
+                            name="t7_4"
+                            value={t7_4}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t7_5"
+                            name="t7_5"
+                            value={t7_5}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t7_6"
+                            name="t7_6"
+                            value={t7_6}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t7_7"
+                            name="t7_7"
+                            value={t7_7}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t7_8"
+                            name="t7_8"
+                            value={t7_8}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t7_9"
+                            name="t7_9"
+                            value={t7_9}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t7_10"
+                            name="t7_10"
+                            value={t7_10}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t7_11"
+                            name="t7_11"
+                            value={t7_11}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t7_12"
+                            name="t7_12"
+                            value={t7_12}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-2 border border-dark '>{descrip8}</div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t12_1"
+                            name="t12_1"
+                            value={t12_1}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t12_2"
+                            name="t12_2"
+                            value={t12_2}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t12_3"
+                            name="t12_3"
+                            value={t12_3}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t12_4"
+                            name="t12_4"
+                            value={t12_4}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t12_5"
+                            name="t12_5"
+                            value={t12_5}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t12_6"
+                            name="t12_6"
+                            value={t12_6}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t12_7"
+                            name="t12_7"
+                            value={t12_7}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t12_8"
+                            name="t12_8"
+                            value={t12_8}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t12_9"
+                            name="t12_9"
+                            value={t12_9}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t12_10"
+                            name="t12_10"
+                            value={t12_10}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t12_11"
+                            name="t12_11"
+                            value={t12_11}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t12_12"
+                            name="t12_12"
+                            value={t12_12}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-2 border border-dark '>{descrip9}</div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t13_1"
+                            name="t13_1"
+                            value={t13_1}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t13_2"
+                            name="t13_2"
+                            value={t13_2}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t13_3"
+                            name="t13_3"
+                            value={t13_3}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t13_4"
+                            name="t13_4"
+                            value={t13_4}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t13_5"
+                            name="t13_5"
+                            value={t13_5}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t13_6"
+                            name="t13_6"
+                            value={t13_6}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t13_7"
+                            name="t13_7"
+                            value={t13_7}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t13_8"
+                            name="t13_8"
+                            value={t13_8}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t13_9"
+                            name="t13_9"
+                            value={t13_9}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t13_10"
+                            name="t13_10"
+                            value={t13_10}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t13_11"
+                            name="t13_11"
+                            value={t13_11}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                        <div className='col border border-dark'> <input
+                            type="text"
+                            className="form-control form-control-sm border-0 p-0 text-center "
+                            id="t13_12"
+                            name="t13_12"
+                            value={t13_12}
+                            onChange={handleInputChange}
+                            required={true}
+                            autoComplete="on"
+                        />
+                        </div>
+                    </div>
+
+                    <div className='row'>
                         <div className='col border border-dark'>ELONGACIONES LABORATORIO %</div>
                     </div>
                     <div className='row'>
-                        <div className='col-2 border border-dark'></div>
+                        <div className='col-2 border border-dark'>
+                            <input
+                                type="text"
+                                className="form-control form-control-sm border-0 p-0 text-center "
+                                id="descl1"
+                                name="descl1"
+                                value={descl1}
+                                onChange={handleInputChange}
+                                required={true}
+                                autoComplete="on"
+                            />
+                        </div>
                         <div className='col border border-dark'>
                             <input
                                 type="text"
@@ -6037,7 +6505,18 @@ const Seguimiento = () => {
                         </div>
                     </div>
                     <div className='row'>
-                        <div className='col-2 border border-dark'></div>
+                        <div className='col-2 border border-dark'>
+                            <input
+                                type="text"
+                                className="form-control form-control-sm border-0 p-0 text-center "
+                                id="descl2"
+                                name="descl2"
+                                value={descl2}
+                                onChange={handleInputChange}
+                                required={true}
+                                autoComplete="on"
+                            />
+                        </div>
                         <div className='col border border-dark'>
                             <input
                                 type="text"
@@ -6112,7 +6591,18 @@ const Seguimiento = () => {
                         </div>
                     </div>
                     <div className='row'>
-                        <div className='col-2 border border-dark'></div>
+                        <div className='col-2 border border-dark'>
+                            <input
+                                type="text"
+                                className="form-control form-control-sm border-0 p-0 text-center "
+                                id="descl3"
+                                name="descl3"
+                                value={descl3}
+                                onChange={handleInputChange}
+                                required={true}
+                                autoComplete="on"
+                            />
+                        </div>
                         <div className='col border border-dark'>
                             <input
                                 type="text"
@@ -6187,7 +6677,18 @@ const Seguimiento = () => {
                         </div>
                     </div>
                     <div className='row'>
-                        <div className='col-2 border border-dark'></div>
+                        <div className='col-2 border border-dark'>
+                            <input
+                                type="text"
+                                className="form-control form-control-sm border-0 p-0 text-center "
+                                id="descl4"
+                                name="descl4"
+                                value={descl4}
+                                onChange={handleInputChange}
+                                required={true}
+                                autoComplete="on"
+                            />
+                        </div>
                         <div className='col border border-dark'>
                             <input
                                 type="text"
@@ -6331,14 +6832,15 @@ const Seguimiento = () => {
                     <div className='col border border-dark'>APROBO:</div>
                 </div>
             </div>
-            <footer>
-                <div className='text-center p-1'>
-                    <button className='btn btn-primary text-center' onClick={update}>Actualizar</button>
+            <footer >
+                <div className='row'>
+                    <div className='col text-center p-1'>
+                        <button className='btn btn-primary text-center' onClick={update}>Actualizar</button>
+                    </div>
+                    <div className='col text-center p-1'>
+                        <button className='btn btn-primary text-center' onClick={guardar}>GUARDAR</button>
+                    </div>
                 </div>
-                <div className='text-center p-1'>
-                    <button className='btn btn-primary text-center' onClick={guardar}>GUARDAR</button>
-                </div>
-
             </footer>
         </div >
     )

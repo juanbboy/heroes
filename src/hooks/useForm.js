@@ -10,7 +10,6 @@ export const useForm = (initialState = {}) => {
     }
 
     const setData = (target) => {
-        console.log(target, "form")
         setValues(target);
     }
 

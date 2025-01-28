@@ -46,8 +46,6 @@ const Formulario = () => {
         if (params.id != null) {
             axios.get('https://desarrollonylon.vercel.app/api').then((res) => {
                 // axios.get('http://localhost:4002/api').then((res) => {
-                console.log("entra")
-                console.log(res.data.find((datos) => datos._id === params.id))
                 cargar(res.data.find((datos) => datos._id === params.id))
             })
         }
@@ -68,17 +66,17 @@ const Formulario = () => {
         formValues.talla = datos.talla
         formValues.img1 = datos.img1
         formValues.img2 = datos.img2
-        setdatos(+1)
+        setdatos(datos + 1)
     }
 
     const inputstar = (e) => {
         formValues.fecha_creacion = e
-        setdatos(+1)
+        setdatos(datos + 1)
     }
 
     const inputend = (e) => {
         formValues.fecha_entrega = e
-        setdatos(+2)
+        setdatos(datos + 2)
     }
 
     const update = async (e) => {
