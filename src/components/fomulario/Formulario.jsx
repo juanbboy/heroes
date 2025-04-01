@@ -42,16 +42,17 @@ const Formulario = () => {
     const UPLOAD_PRESET = "ml_default"
 
     useEffect(() => {
+        const fetchData = async () => {
+            if (params.id != null) {
+                axios.get('https://desarrollonylon.vercel.app/api').then((res) => {
+                    // axios.get('http://localhost:4002/api').then((res) => {
+                    cargar(res.data.find((datos) => datos._id === params.id))
 
-        if (params.id != null) {
-            axios.get('https://desarrollonylon.vercel.app/api').then((res) => {
-                // axios.get('http://localhost:4002/api').then((res) => {
-                cargar(res.data.find((datos) => datos._id === params.id))
-            })
-        }
-        console.log(params.id)
-
-    }, [params.id])
+                })
+            }
+        };
+        fetchData();
+    }, [params.id]);
 
     const cargar = (datos) => {
         formValues.id = datos.id

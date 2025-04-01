@@ -6,29 +6,21 @@ import { getByEstado } from '../../selectors/getByEstado';
 
 
 const SearchScreen = () => {
-
-    const [searchHeroes, setsearchHeroes] = useState()
+    const [formValues, handleInputChange] = useForm({ searchText: '' });
+    const [searchHeroes, setsearchHeroes] = useState([]);
+    const { searchText } = formValues;
 
     useEffect(() => {
         search()
     }, [])
 
-    // const { q = '' } = queryString.parse(location.search);
 
-    const [formValues, handleInputChange] = useForm({
-        searchText: ""
-    });
-
-    const { searchText } = formValues;
 
     const search = async (e) => {
         await (getHeroesByName(e)).then((res) => {
-            console.log(res, "res1")
-            if (res !== "") {
-                console.log("entra")
+            if (res.length === 0) {
                 getByEstado(e).then((res) => {
                     setsearchHeroes(res)
-                    console.log(res, "res2")
                 })
             } else setsearchHeroes(res)
         })
@@ -82,9 +74,11 @@ const SearchScreen = () => {
                     </h3>
                     <hr />
                     <div className='row'>
-                        {
-                            searchHeroes.map(hero => <div className='  p-1 col-sm-6'><HeroCard key={hero.id} {...hero} /> </div>)
-                        }
+                        {searchHeroes.map(hero => (
+                            <div key={hero.id} className='p-1 col-sm-6'>
+                                <HeroCard {...hero} />
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

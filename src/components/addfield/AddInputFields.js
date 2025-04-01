@@ -12,10 +12,10 @@ const AddInputFields = ({ crudo, tit_tabla, id, date }) => {
   const [date1, setdate1] = useState(date)
   const [talla, setTalla] = useState([
     {
-      uno: '',
-      dos: '',
-      tres: '',
-      cuatro: ''
+      uno: 'S',
+      dos: 'M',
+      tres: "L",
+      cuatro: 'XL'
     }]
   )
 
@@ -37,9 +37,10 @@ const AddInputFields = ({ crudo, tit_tabla, id, date }) => {
     if (crudo) {
       setformValues(crudo)
     }
-    if (tit_tabla !== "") {
+    if (tit_tabla.length !== 0) {
       setTalla(tit_tabla)
-    } else {
+    }
+    else {
       setTalla([{
         uno: 'S',
         dos: 'M',

@@ -8,6 +8,5 @@ export const getByEstado = async (estado = '') => {
     }
 
     estado = estado.toLowerCase()
-    console.log(estado)
     return await data.then((res) => res.filter(res => res.estado?.toLowerCase().includes(estado)))
 }

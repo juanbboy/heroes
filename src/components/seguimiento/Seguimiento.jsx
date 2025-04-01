@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import './seguimiento.css';
 import { useForm } from '../../hooks/useForm';
 import { useLocation, useParams } from 'react-router-dom';
@@ -9,7 +9,12 @@ const Seguimiento = () => {
     const location = useLocation();
     const params = useParams()
 
-    const [formValues, handleInputChange, , setData] = useForm({
+    const initialFormValues = useMemo(() => ({
+        zona1: "",
+        zona2: "",
+        zona3: "",
+        zona4: "",
+        zona5: "",
         fecha: new Date(Date.now()).toLocaleDateString(),
         producto: "",
         media: "",
@@ -39,11 +44,6 @@ const Seguimiento = () => {
         matec1: "",
         matec2: "",
         matec3: "",
-        zona1: "",
-        zona2: "",
-        zona3: "",
-        zona4: "",
-        zona5: "",
         hilo1: "",
         hilo2: "",
         hilo3: "",
@@ -59,162 +59,184 @@ const Seguimiento = () => {
         hilo13: "",
         hilo14: "",
         hilo15: "",
-        t1_1: "",
-        t1_2: "",
-        t1_3: "",
-        t1_4: "",
-        t1_5: "",
-        t1_6: "",
-        t1_7: "",
-        t1_8: "",
-        t1_9: "",
-        t1_10: "",
-        t1_11: "",
-        t1_12: "",
-        t2_1: "",
-        t2_2: "",
-        t2_3: "",
-        t2_4: "",
-        t2_5: "",
-        t2_6: "",
-        t2_7: "",
-        t2_8: "",
-        t2_9: "",
-        t2_10: "",
-        t2_11: "",
-        t2_12: "",
-        t3_1: "",
-        t3_2: "",
-        t3_3: "",
-        t3_4: "",
-        t3_5: "",
-        t3_6: "",
-        t3_7: "",
-        t3_8: "",
-        t3_9: "",
-        t3_10: "",
-        t3_11: "",
-        t3_12: "",
-        t4_1: "",
-        t4_2: "",
-        t4_3: "",
-        t4_4: "",
-        t4_5: "",
-        t4_6: "",
-        t4_7: "",
-        t4_8: "",
-        t4_9: "",
-        t4_10: "",
-        t4_11: "",
-        t4_12: "",
-        t5_1: "",
-        t5_2: "",
-        t5_3: "",
-        t5_4: "",
-        t5_5: "",
-        t5_6: "",
-        t5_7: "",
-        t5_8: "",
-        t5_9: "",
-        t5_10: "",
-        t5_11: "",
-        t5_12: "",
-        t6_1: "",
-        t6_2: "",
-        t6_3: "",
-        t6_4: "",
-        t6_5: "",
-        t6_6: "",
-        t6_7: "",
-        t6_8: "",
-        t6_9: "",
-        t6_10: "",
-        t6_11: "",
-        t6_12: "",
-        t7_1: "",
-        t7_2: "",
-        t7_3: "",
-        t7_4: "",
-        t7_5: "",
-        t7_6: "",
-        t7_7: "",
-        t7_8: "",
-        t7_9: "",
-        t7_10: "",
-        t7_11: "",
-        t7_12: "",
-        t12_1: "",
-        t12_2: "",
-        t12_3: "",
-        t12_4: "",
-        t12_5: "",
-        t12_6: "",
-        t12_7: "",
-        t12_8: "",
-        t12_9: "",
-        t12_10: "",
-        t12_11: "",
-        t12_12: "",
-        t13_1: "",
-        t13_2: "",
-        t13_3: "",
-        t13_4: "",
-        t13_5: "",
-        t13_6: "",
-        t13_7: "",
-        t13_8: "",
-        t13_9: "",
-        t13_10: "",
-        t13_11: "",
-        t13_12: "",
-        t8_1: "",
-        t8_2: "",
-        t8_3: "",
-        t8_4: "",
-        t8_5: "",
-        t8_6: "",
-        t8_7: "",
-        t8_8: "",
-        t8_9: "",
-        t8_10: "",
-        t8_11: "",
-        t8_12: "",
-        t9_1: "",
-        t9_2: "",
-        t9_3: "",
-        t9_4: "",
-        t9_5: "",
-        t9_6: "",
-        t9_7: "",
-        t9_8: "",
-        t9_9: "",
-        t9_10: "",
-        t9_11: "",
-        t9_12: "",
-        t10_1: "",
-        t10_2: "",
-        t10_3: "",
-        t10_4: "",
-        t10_5: "",
-        t10_6: "",
-        t10_7: "",
-        t10_8: "",
-        t10_9: "",
-        t10_10: "",
-        t10_11: "",
-        t10_12: "",
-        t11_1: "",
-        t11_2: "",
-        t11_3: "",
-        t11_4: "",
-        t11_5: "",
-        t11_6: "",
-        t11_7: "",
-        t11_8: "",
-        t11_9: "",
-        t11_10: "",
-        t11_11: "",
-        t11_12: "",
+        torsion1: "",
+        torsion2: "",
+        torsion3: "",
+        torsion4: "",
+        torsion5: "",
+        torsion6: "",
+        torsion7: "",
+        torsion8: "",
+        torsion9: "",
+        torsion10: "",
+        torsion11: "",
+        torsion12: "",
+        torsion13: "",
+        torsion14: "",
+        torsion15: "",
+        proveedor1: "",
+        proveedor2: "",
+        proveedor3: "",
+        proveedor4: "",
+        proveedor5: "",
+        proveedor6: "",
+        proveedor7: "",
+        proveedor8: "",
+        proveedor9: "",
+        proveedor10: "",
+        proveedor11: "",
+        proveedor12: "",
+        proveedor13: "",
+        proveedor14: "",
+        proveedor15: "",
+        lote1: "",
+        lote2: "",
+        lote3: "",
+        lote4: "",
+        lote5: "",
+        lote6: "",
+        lote7: "",
+        lote8: "",
+        lote9: "",
+        lote10: "",
+        lote11: "",
+        lote12: "",
+        lote13: "",
+        lote14: "",
+        lote15: "",
+        c1_1: "",
+        c1_2: "",
+        c1_3: "",
+        c1_4: "",
+        c1_5: "",
+        c1_6: "",
+        c1_7: "",
+        c1_8: "",
+        c2_1: "",
+        c2_2: "",
+        c2_3: "",
+        c2_4: "",
+        c2_5: "",
+        c2_6: "",
+        c2_7: "",
+        c2_8: "",
+        c3_1: "",
+        c3_2: "",
+        c3_3: "",
+        c3_4: "",
+        c3_5: "",
+        c3_6: "",
+        c3_7: "",
+        c3_8: "",
+        c4_1: "",
+        c4_2: "",
+        c4_3: "",
+        c4_4: "",
+        c4_5: "",
+        c4_6: "",
+        c4_7: "",
+        c4_8: "",
+        c5_1: "",
+        c5_2: "",
+        c5_3: "",
+        c5_4: "",
+        c5_5: "",
+        c5_6: "",
+        c5_7: "",
+        c5_8: "",
+        c6_1: "",
+        c6_2: "",
+        c6_3: "",
+        c6_4: "",
+        c6_5: "",
+        c6_6: "",
+        c6_7: "",
+        c6_8: "",
+        c7_1: "",
+        c7_2: "",
+        c7_3: "",
+        c7_4: "",
+        c7_5: "",
+        c7_6: "",
+        c7_7: "",
+        c7_8: "",
+        c8_1: "",
+        c8_2: "",
+        c8_3: "",
+        c8_4: "",
+        c8_5: "",
+        c8_6: "",
+        c8_7: "",
+        c8_8: "",
+        c9_1: "",
+        c9_2: "",
+        c9_3: "",
+        c9_4: "",
+        c9_5: "",
+        c9_6: "",
+        c9_7: "",
+        c9_8: "",
+        c10_1: "",
+        c10_2: "",
+        c10_3: "",
+        c10_4: "",
+        c10_5: "",
+        c10_6: "",
+        c10_7: "",
+        c10_8: "",
+        c11_1: "",
+        c11_2: "",
+        c11_3: "",
+        c11_4: "",
+        c11_5: "",
+        c11_6: "",
+        c11_7: "",
+        c11_8: "",
+        c12_1: "",
+        c12_2: "",
+        c12_3: "",
+        c12_4: "",
+        c12_5: "",
+        c12_6: "",
+        c12_7: "",
+        c12_8: "",
+        c13_1: "",
+        c13_2: "",
+        c13_3: "",
+        c13_4: "",
+        c13_5: "",
+        c13_6: "",
+        c13_7: "",
+        c13_8: "",
+        c14_1: "",
+        c14_2: "",
+        c14_3: "",
+        c14_4: "",
+        c14_5: "",
+        c14_6: "",
+        c14_7: "",
+        c14_8: "",
+        c15_1: "",
+        c15_2: "",
+        c15_3: "",
+        c15_4: "",
+        c15_5: "",
+        c15_6: "",
+        c15_7: "",
+        c15_8: "",
+        descrip1: "",
+        descrip2: "",
+        descrip3: "",
+        descrip4: "",
+        descrip5: "",
+        descrip6: "",
+        descrip7: "",
+        descrip8: "",
+        descrip9: "",
+        descl1: "",
+        descl2: "",
+        descl3: "",
+        descl4: "",
         m1_1: "",
         m1_2: "",
         m1_3: "",
@@ -323,14 +345,148 @@ const Seguimiento = () => {
         m9_10: "",
         m9_11: "",
         m9_12: "",
+        horma: "",
+        nmq: "",
+        color: "",
+        nmqh: "",
+        tacabado: "",
+        t1_1: "",
+        t1_2: "",
+        t1_3: "",
+        t1_4: "",
+        t1_5: "",
+        t1_6: "",
+        t1_7: "",
+        t1_8: "",
+        t1_9: "",
+        t1_10: "",
+        t1_11: "",
+        t1_12: "",
+        t2_1: "",
+        t2_2: "",
+        t2_3: "",
+        t2_4: "",
+        t2_5: "",
+        t2_6: "",
+        t2_7: "",
+        t2_8: "",
+        t2_9: "",
+        t2_10: "",
+        t2_11: "",
+        t2_12: "",
+        t3_1: "",
+        t3_2: "",
+        t3_3: "",
+        t3_4: "",
+        t3_5: "",
+        t3_6: "",
+        t3_7: "",
+        t3_8: "",
+        t3_9: "",
+        t3_10: "",
+        t3_11: "",
+        t3_12: "",
+        t4_1: "",
+        t4_2: "",
+        t4_3: "",
+        t4_4: "",
+        t4_5: "",
+        t4_6: "",
+        t4_7: "",
+        t4_8: "",
+        t4_9: "",
+        t4_10: "",
+        t4_11: "",
+        t4_12: "",
+        t5_1: "",
+        t5_2: "",
+        t5_3: "",
+        t5_4: "",
+        t5_5: "",
+        t5_6: "",
+        t5_7: "",
+        t5_8: "",
+        t5_9: "",
+        t5_10: "",
+        t5_11: "",
+        t5_12: "",
+        t6_1: "",
+        t6_2: "",
+        t6_3: "",
+        t6_4: "",
+        t6_5: "",
+        t6_6: "",
+        t6_7: "",
+        t6_8: "",
+        t6_9: "",
+        t6_10: "",
+        t6_11: "",
+        t6_12: "",
+        t7_1: "",
+        t7_2: "",
+        t7_3: "",
+        t7_4: "",
+        t7_5: "",
+        t7_6: "",
+        t7_7: "",
+        t7_8: "",
+        t7_9: "",
+        t7_10: "",
+        t7_11: "",
+        t7_12: "",
+        t8_1: "",
+        t8_2: "",
+        t8_3: "",
+        t8_4: "",
+        t8_5: "",
+        t8_6: "",
+        t9_1: "",
+        t9_2: "",
+        t9_3: "",
+        t9_4: "",
+        t9_5: "",
+        t9_6: "",
+        t10_1: "",
+        t10_2: "",
+        t10_3: "",
+        t10_4: "",
+        t10_5: "",
+        t10_6: "",
+        t11_1: "",
+        t11_2: "",
+        t11_3: "",
+        t11_4: "",
+        t11_5: "",
+        t11_6: "",
+        t12_1: "",
+        t12_2: "",
+        t12_3: "",
+        t12_4: "",
+        t12_5: "",
+        t12_6: "",
+        t12_7: "",
+        t12_8: "",
+        t12_9: "",
+        t12_10: "",
+        t12_11: "",
+        t12_12: "",
+        t13_1: "",
+        t13_2: "",
+        t13_3: "",
+        t13_4: "",
+        t13_5: "",
+        t13_6: "",
+        t13_7: "",
+        t13_8: "",
+        t13_9: "",
+        t13_10: "",
+        t13_11: "",
+        t13_12: "",
         obs: "",
-        descl1: "",
-        descl2: "",
-        descl3: "",
-        descl4: "",
+    }), []);
 
-    });
 
+    const [formValues, handleInputChange, , setData] = useForm(initialFormValues);
 
     const {
         zona1,
@@ -815,7 +971,8 @@ const Seguimiento = () => {
         if (state.hero && state.hero.seguimiento && state.hero.seguimiento.length > 0) {
             setData(state.hero.seguimiento[state.index]);
         }
-    }, [state]);
+        console.log("data");
+    }, [state.hero, state.index, setData]);
 
     const update = async (e) => {
         e.preventDefault();
@@ -4990,10 +5147,6 @@ const Seguimiento = () => {
                 <div className='col border border-dark'>APROBO:</div>
             </div>
 
-
-
-
-
             <div className='my-5'>
                 <div className='row'>
                     <div className='col border border-dark'>4. MODELOS
@@ -6009,141 +6162,7 @@ const Seguimiento = () => {
                         />
                         </div>
                     </div>
-                    <div className='row'>
-                        <div className='col-2 border border-dark '>{descrip7}</div>
-                        <div className='col border border-dark'> <input
-                            type="text"
-                            className="form-control form-control-sm border-0 p-0 text-center "
-                            id="t7_1"
-                            name="t7_1"
-                            value={t7_1}
-                            onChange={handleInputChange}
-                            required={true}
-                            autoComplete="on"
-                        />
-                        </div>
-                        <div className='col border border-dark'> <input
-                            type="text"
-                            className="form-control form-control-sm border-0 p-0 text-center "
-                            id="t7_2"
-                            name="t7_2"
-                            value={t7_2}
-                            onChange={handleInputChange}
-                            required={true}
-                            autoComplete="on"
-                        />
-                        </div>
-                        <div className='col border border-dark'> <input
-                            type="text"
-                            className="form-control form-control-sm border-0 p-0 text-center "
-                            id="t7_3"
-                            name="t7_3"
-                            value={t7_3}
-                            onChange={handleInputChange}
-                            required={true}
-                            autoComplete="on"
-                        />
-                        </div>
-                        <div className='col border border-dark'> <input
-                            type="text"
-                            className="form-control form-control-sm border-0 p-0 text-center "
-                            id="t7_4"
-                            name="t7_4"
-                            value={t7_4}
-                            onChange={handleInputChange}
-                            required={true}
-                            autoComplete="on"
-                        />
-                        </div>
-                        <div className='col border border-dark'> <input
-                            type="text"
-                            className="form-control form-control-sm border-0 p-0 text-center "
-                            id="t7_5"
-                            name="t7_5"
-                            value={t7_5}
-                            onChange={handleInputChange}
-                            required={true}
-                            autoComplete="on"
-                        />
-                        </div>
-                        <div className='col border border-dark'> <input
-                            type="text"
-                            className="form-control form-control-sm border-0 p-0 text-center "
-                            id="t7_6"
-                            name="t7_6"
-                            value={t7_6}
-                            onChange={handleInputChange}
-                            required={true}
-                            autoComplete="on"
-                        />
-                        </div>
-                        <div className='col border border-dark'> <input
-                            type="text"
-                            className="form-control form-control-sm border-0 p-0 text-center "
-                            id="t7_7"
-                            name="t7_7"
-                            value={t7_7}
-                            onChange={handleInputChange}
-                            required={true}
-                            autoComplete="on"
-                        />
-                        </div>
-                        <div className='col border border-dark'> <input
-                            type="text"
-                            className="form-control form-control-sm border-0 p-0 text-center "
-                            id="t7_8"
-                            name="t7_8"
-                            value={t7_8}
-                            onChange={handleInputChange}
-                            required={true}
-                            autoComplete="on"
-                        />
-                        </div>
-                        <div className='col border border-dark'> <input
-                            type="text"
-                            className="form-control form-control-sm border-0 p-0 text-center "
-                            id="t7_9"
-                            name="t7_9"
-                            value={t7_9}
-                            onChange={handleInputChange}
-                            required={true}
-                            autoComplete="on"
-                        />
-                        </div>
-                        <div className='col border border-dark'> <input
-                            type="text"
-                            className="form-control form-control-sm border-0 p-0 text-center "
-                            id="t7_10"
-                            name="t7_10"
-                            value={t7_10}
-                            onChange={handleInputChange}
-                            required={true}
-                            autoComplete="on"
-                        />
-                        </div>
-                        <div className='col border border-dark'> <input
-                            type="text"
-                            className="form-control form-control-sm border-0 p-0 text-center "
-                            id="t7_11"
-                            name="t7_11"
-                            value={t7_11}
-                            onChange={handleInputChange}
-                            required={true}
-                            autoComplete="on"
-                        />
-                        </div>
-                        <div className='col border border-dark'> <input
-                            type="text"
-                            className="form-control form-control-sm border-0 p-0 text-center "
-                            id="t7_12"
-                            name="t7_12"
-                            value={t7_12}
-                            onChange={handleInputChange}
-                            required={true}
-                            autoComplete="on"
-                        />
-                        </div>
-                    </div>
+
                     <div className='row'>
                         <div className='col-2 border border-dark '>{descrip8}</div>
                         <div className='col border border-dark'> <input
