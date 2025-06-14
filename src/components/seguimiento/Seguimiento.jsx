@@ -972,7 +972,7 @@ const Seguimiento = () => {
             setData(state.hero.seguimiento[state.index]);
         }
         console.log("data");
-    }, [state.hero, state.index, setData]);
+    }, [state.hero, state.index]);
 
     const update = async (e) => {
         e.preventDefault();
